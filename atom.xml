@@ -6,29 +6,48 @@
   <link href="http://huhangbo.gitee.io/atom.xml" rel="self"/>
   
   <link href="http://huhangbo.gitee.io/"/>
-  <updated>2021-02-21T01:48:59.211Z</updated>
+  <updated>2021-02-23T03:52:36.565Z</updated>
   <id>http://huhangbo.gitee.io/</id>
   
   <author>
-    <name>胡航博</name>
+    <name>莉粑粑</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>添加loading-pages</title>
+    <link href="http://huhangbo.gitee.io/2021/02/23/tian-jia-loading-pages/"/>
+    <id>http://huhangbo.gitee.io/2021/02/23/tian-jia-loading-pages/</id>
+    <published>2021-02-23T03:00:02.000Z</published>
+    <updated>2021-02-23T03:52:36.565Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;添加了一个玩命加载中的网页过渡动画&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="JavaScript" scheme="http://huhangbo.gitee.io/tags/JavaScript/"/>
+    
+    <category term="Css3" scheme="http://huhangbo.gitee.io/tags/Css3/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
     <link href="http://huhangbo.gitee.io/2021/02/21/hello-world/"/>
     <id>http://huhangbo.gitee.io/2021/02/21/hello-world/</id>
     <published>2021-02-21T01:48:59.210Z</published>
-    <updated>2021-02-21T01:48:59.211Z</updated>
+    <updated>2021-02-23T03:18:41.426Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;</summary>
+    <summary type="html">&lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a</summary>
         
       
     
