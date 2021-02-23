@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
-<html lang="zn-CN">
+<html lang="zh-CN">
 
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="添加loading-pages, 莉粑粑">
-    <meta name="description" content="">
+    <meta name="description" content="莉粑粑的个人网站">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -240,7 +240,7 @@
           
           <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
           
-          <span>成就</span>
+          <span>归档</span>
         </a>
       </li>
       
@@ -297,7 +297,7 @@
   
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
     </a>
   </li>
 </ul>
@@ -312,7 +312,7 @@
         <div class="logo-name">莉粑粑</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            莉粑粑的个人网站
             
         </div>
     </div>
@@ -369,7 +369,7 @@
 				  
 				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
 			      
-		          <span>成就</span>
+		          <span>归档</span>
                   </a>
                 </li>
               
@@ -628,8 +628,8 @@
                                 <span class="chip bg-color">JavaScript</span>
                             </a>
                         
-                            <a href="/tags/Css3/">
-                                <span class="chip bg-color">Css3</span>
+                            <a href="/tags/CSS/">
+                                <span class="chip bg-color">CSS</span>
                             </a>
                         
                     </div>
@@ -637,13 +637,22 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Hexo/" class="post-category">
+                                Hexo
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
             <div class="post-info">
                 
                 <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2021-02-23
                 </div>
                 
@@ -652,15 +661,15 @@
 
                 
                 <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    756
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    732
                 </div>
                 
 
                 
                 <div class="info-break-policy">
-                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    4 Min
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    4 分
                 </div>
                 
 
@@ -678,11 +687,11 @@
                 <script src="\assets\js\APlayer.min.js"> </script><p>添加了一个玩命加载中的网页过渡动画</p>
 <a id="more"></a>
 <p>首先在站点根目录下新建一个文件夹，名为<strong>scripts</strong>，然后在新建的文件夹下新建一个名为<strong>loading-pages</strong>的 js 文件，填入下面的代码：</p>
-<pre><code>/* global hexo */
-"use strict";
-hexo.extend.filter.register('after_render:html', function (htmlContent) {
-     const injectHead =
- `&lt;style type="text/css" lang="css"&gt;
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">/* global hexo */</span>
+<span class="token string">"use strict"</span><span class="token punctuation">;</span>
+hexo<span class="token punctuation">.</span>extend<span class="token punctuation">.</span>filter<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token string">'after_render:html'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>htmlContent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">const</span> injectHead <span class="token operator">=</span>
+ <span class="token template-string"><span class="token string">`&lt;style type="text/css" lang="css">
     #loading-container{
         position: fixed;
         top: 0;
@@ -797,8 +806,8 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
     /* logo出现动画 */
     @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
     @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
- &lt;/style&gt;
- &lt;script&gt;
+ &lt;/style>
+ &lt;script>
 (function () {
     const loaded = function(){
        setTimeout(function(){
@@ -812,28 +821,28 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
     };
     loaded();
 })()
- &lt;/script&gt;`;
-     const injectBody = `
- &lt;div id="loading-container"&gt;
-     &lt;p class="loading-text"&gt;玩命加载中 . . . &lt;/p&gt; 
-     &lt;div class="loading-image"&gt;
-         &lt;div&gt;&lt;/div&gt;
-         &lt;div&gt;&lt;/div&gt;
-         &lt;div&gt;&lt;/div&gt;
-         &lt;div&gt;&lt;/div&gt; 
-         &lt;div&gt;&lt;/div&gt;
-     &lt;/div&gt;
- &lt;/div&gt;`;
-     if (/&lt;\/head&gt;/gi.test(htmlContent)) {
-         let lastIndex = htmlContent.lastIndexOf('&lt;/head&gt;');
-         htmlContent = htmlContent.substring(0, lastIndex) + injectHead + htmlContent.substring(lastIndex, htmlContent.length);
-     }
-     if (/&lt;body&gt;/gi.test(htmlContent)) {
-         let index = htmlContent.indexOf('&lt;body&gt;');
-         htmlContent = htmlContent.substring(0, index) + injectBody + htmlContent.substring(index, htmlContent.length);
-     }
-     return htmlContent;
- }, 1);
+ &lt;/script>`</span></span><span class="token punctuation">;</span>
+     <span class="token keyword">const</span> injectBody <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
+ &lt;div id="loading-container">
+     &lt;p class="loading-text">玩命加载中 . . . &lt;/p> 
+     &lt;div class="loading-image">
+         &lt;div>&lt;/div>
+         &lt;div>&lt;/div>
+         &lt;div>&lt;/div>
+         &lt;div>&lt;/div> 
+         &lt;div>&lt;/div>
+     &lt;/div>
+ &lt;/div>`</span></span><span class="token punctuation">;</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/&lt;\/head>/gi</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>htmlContent<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token keyword">let</span> lastIndex <span class="token operator">=</span> htmlContent<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token string">'&lt;/head>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         htmlContent <span class="token operator">=</span> htmlContent<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> lastIndex<span class="token punctuation">)</span> <span class="token operator">+</span> injectHead <span class="token operator">+</span> htmlContent<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>lastIndex<span class="token punctuation">,</span> htmlContent<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/&lt;body>/gi</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>htmlContent<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token keyword">let</span> index <span class="token operator">=</span> htmlContent<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'&lt;body>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         htmlContent <span class="token operator">=</span> htmlContent<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span> <span class="token operator">+</span> injectBody <span class="token operator">+</span> htmlContent<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> htmlContent<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">return</span> htmlContent<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p> 可以先在本地运行查看效果。<br> 其中玩命加载中文字也可以换成其他文字，只需将上述代码中对应文字修改即可。</p>
 
@@ -848,7 +857,7 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
             <div class="reprint__author">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-user">
-                        Author:
+                        文章作者:
                     </i>
                 </span>
                 <span class="reprint-info">
@@ -858,7 +867,7 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
             <div class="reprint__type">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-link">
-                        Link:
+                        文章链接:
                     </i>
                 </span>
                 <span class="reprint-info">
@@ -868,13 +877,13 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
             <div class="reprint__notice">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-copyright">
-                        Reprint policy:
+                        版权声明:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    All articles in this blog are used except for special statements
+                    本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    reprint polocy. If reproduced, please indicate source
+                    许可协议。转载请注明来源
                     <a href="/about" target="_blank">莉粑粑</a>
                     !
                 </span>
@@ -884,7 +893,7 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -904,8 +913,8 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
                                     <span class="chip bg-color">JavaScript</span>
                                 </a>
                             
-                                <a href="/tags/Css3/">
-                                    <span class="chip bg-color">Css3</span>
+                                <a href="/tags/CSS/">
+                                    <span class="chip bg-color">CSS</span>
                                 </a>
                             
                         </div>
@@ -916,7 +925,7 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
     
 
@@ -1038,7 +1047,7 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1077,7 +1086,7 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
         
         <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
                 <a href="/2021/02/23/tian-jia-loading-pages/">
@@ -1101,8 +1110,12 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            莉粑粑
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Hexo/" class="post-category">
+                                    Hexo
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -1115,8 +1128,8 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
                         <span class="chip bg-color">JavaScript</span>
                     </a>
                     
-                    <a href="/tags/Css3/">
-                        <span class="chip bg-color">Css3</span>
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
                     </a>
                     
                 </div>
@@ -1127,7 +1140,7 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2021/02/21/hello-world/">
@@ -1194,9 +1207,9 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + 'From: 莉粑粑<br />'
-            + 'Author: 莉粑粑<br />'
-            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '来源: 莉粑粑<br />'
+            + '文章作者: 莉粑粑<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
 
         selection.selectAllChildren(newdiv);
@@ -1226,7 +1239,7 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -1393,7 +1406,7 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">829</span>&nbsp;字
+                class="white-color">805</span>&nbsp;字
             
             
             
@@ -1506,8 +1519,8 @@ hexo.extend.filter.register('after_render:html', function (htmlContent) {
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>
