@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>潜航博懿</title>
+  <title>浅航博懿</title>
   
   <subtitle>别秃头就行( $ _ $ )</subtitle>
   <link href="http://huhangbo.gitee.io/atom.xml" rel="self"/>
   
   <link href="http://huhangbo.gitee.io/"/>
-  <updated>2021-02-23T05:24:19.430Z</updated>
+  <updated>2021-02-25T14:55:44.715Z</updated>
   <id>http://huhangbo.gitee.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://huhangbo.gitee.io/2021/02/23/tian-jia-loading-pages/"/>
     <id>http://huhangbo.gitee.io/2021/02/23/tian-jia-loading-pages/</id>
     <published>2021-02-23T03:00:02.000Z</published>
-    <updated>2021-02-23T05:24:19.430Z</updated>
+    <updated>2021-02-25T14:55:44.715Z</updated>
     
     
     <summary type="html">&lt;p&gt;添加了一个玩命加载中的网页过渡动画&lt;/p&gt;</summary>
