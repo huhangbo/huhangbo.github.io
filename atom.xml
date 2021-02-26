@@ -3,11 +3,11 @@
   <title>浅航博懿</title>
   
   <subtitle>别秃 $_$</subtitle>
-  <link href="http://huhangbo.ver.app/atom.xml" rel="self"/>
+  <link href="http://huhangbo.cn/atom.xml" rel="self"/>
   
-  <link href="http://huhangbo.ver.app/"/>
+  <link href="http://huhangbo.cn/"/>
   <updated>2021-02-25T14:55:44.715Z</updated>
-  <id>http://huhangbo.ver.app/</id>
+  <id>http://huhangbo.cn/</id>
   
   <author>
     <name>浅航博懿</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>添加loading-pages</title>
-    <link href="http://huhangbo.ver.app/2021/02/23/tian-jia-loading-pages/"/>
-    <id>http://huhangbo.ver.app/2021/02/23/tian-jia-loading-pages/</id>
+    <link href="http://huhangbo.cn/2021/02/23/tian-jia-loading-pages/"/>
+    <id>http://huhangbo.cn/2021/02/23/tian-jia-loading-pages/</id>
     <published>2021-02-23T03:00:02.000Z</published>
     <updated>2021-02-25T14:55:44.715Z</updated>
     
@@ -28,12 +28,12 @@
     
     
     
-    <category term="Hexo" scheme="http://huhangbo.ver.app/categories/Hexo/"/>
+    <category term="Hexo" scheme="http://huhangbo.cn/categories/Hexo/"/>
     
     
-    <category term="JavaScript" scheme="http://huhangbo.ver.app/tags/JavaScript/"/>
+    <category term="JavaScript" scheme="http://huhangbo.cn/tags/JavaScript/"/>
     
-    <category term="CSS" scheme="http://huhangbo.ver.app/tags/CSS/"/>
+    <category term="CSS" scheme="http://huhangbo.cn/tags/CSS/"/>
     
   </entry>
   
