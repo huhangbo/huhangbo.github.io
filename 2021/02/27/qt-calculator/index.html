@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="添加loading-pages, 浅航博懿的个人网站">
+    <meta name="keywords" content="Qt-Calculator, 浅航博懿的个人网站">
     <meta name="description" content="Live a good life, write some good code !!!">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>添加loading-pages | 浅航博懿</title>
+    <title>Qt-Calculator | 浅航博懿</title>
     <link rel="icon" type="image/png" href="/logo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">添加loading-pages</h1>
+                    <h1 class="description center-align post-title">Qt-Calculator</h1>
                 </div>
             </div>
         </div>
@@ -631,12 +631,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/JavaScript/">
-                                <span class="chip bg-color">JavaScript</span>
-                            </a>
-                        
-                            <a href="/tags/CSS/">
-                                <span class="chip bg-color">CSS</span>
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C++</span>
                             </a>
                         
                     </div>
@@ -647,8 +643,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Hexo/" class="post-category">
-                                Hexo
+                            <a href="/categories/Qt/" class="post-category">
+                                Qt
                             </a>
                         
                     </div>
@@ -660,7 +656,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-02-23
+                    2021-02-27
                 </div>
                 
 
@@ -669,14 +665,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    732
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    10 分
                 </div>
                 
 
@@ -691,167 +687,1147 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <script src="\assets\js\APlayer.min.js"> </script><p>添加了一个玩命加载中的网页过渡动画</p>
+                <script src="\assets\js\APlayer.min.js"> </script><p>用<strong>Qt</strong>做的计算器</p>
 <a id="more"></a>
-<p>首先在站点根目录下新建一个文件夹，名为<strong>scripts</strong>，然后在新建的文件夹下新建一个名为<strong>loading-pages</strong>的 js 文件，填入下面的代码：</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">/* global hexo */</span>
-<span class="token string">"use strict"</span><span class="token punctuation">;</span>
-hexo<span class="token punctuation">.</span>extend<span class="token punctuation">.</span>filter<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token string">'after_render:html'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>htmlContent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-     <span class="token keyword">const</span> injectHead <span class="token operator">=</span>
- <span class="token template-string"><span class="token string">`&lt;style type="text/css" lang="css">
-    #loading-container{
-        position: fixed;
-        top: 0;
-        left: 0;
-        min-height: 100vh;
-        width: 100vw;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: #FFF;
-        text-align: center;
-        /* loader页面消失采用渐隐的方式*/
-        -webkit-transition: opacity 1s ease;
-        -moz-transition: opacity 1s ease;
-        -o-transition: opacity 1s ease;
-        transition: opacity 1s ease;
-    }
-    .loading-image{
-        width: 120px;
-        height: 50px;
-        transform: translate(-50%);
-    }
-    
-    .loading-image div:nth-child(2) {
-        -webkit-animation: pacman-balls 1s linear 0s infinite;
-        animation: pacman-balls 1s linear 0s infinite
-    }
+<p>大二的时候第一次接触Qt，用Qt做了一个计算器</p>
+<h1 id="一、软件界面"><a href="#一、软件界面" class="headerlink" title="一、软件界面"></a>一、软件界面</h1><p>主界面<br><img src="https://huhangbo.gitee.io/huhangbo-imgs/Qt/Calculator/1.png" title="软件主界面"></p>
+<p>贷款计算器<br><img src="https://huhangbo.gitee.io/huhangbo-imgs/Qt/Calculator/2.png" title="贷款计算器"></p>
+<h1 id="二、代码"><a href="#二、代码" class="headerlink" title="二、代码"></a>二、代码</h1><p><img src="https://huhangbo.gitee.io/huhangbo-imgs/Qt/Calculator/3.png"></p>
+<h2 id="1-初始化文件："><a href="#1-初始化文件：" class="headerlink" title="1.初始化文件："></a>1.初始化文件：</h2><h3 id="mainwindow-h"><a href="#mainwindow-h" class="headerlink" title="mainwindow.h"></a>mainwindow.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-    .loading-image div:nth-child(3) {
-        -webkit-animation: pacman-balls 1s linear .33s infinite;
-        animation: pacman-balls 1s linear .33s infinite
-    }
+#include <QMainWindow>
+#include <QKeyEvent>
+#include "calculator.h"
+#include"loan.h"
 
-    .loading-image div:nth-child(4) {
-        -webkit-animation: pacman-balls 1s linear .66s infinite;
-        animation: pacman-balls 1s linear .66s infinite
-    }
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
 
-    .loading-image div:nth-child(5) {
-        -webkit-animation: pacman-balls 1s linear .99s infinite;
-        animation: pacman-balls 1s linear .99s infinite
-    }
-    
-   .loading-image div:first-of-type {
-        width: 0;
-        height: 0;
-        border: 25px solid #49b1f5;
-        border-right-color: transparent;
-        border-radius: 25px;
-        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
-        animation: rotate_pacman_half_up .5s 0s infinite;
-    }
-    .loading-image div:nth-child(2) {
-        width: 0;
-        height: 0;
-        border: 25px solid #49b1f5;
-        border-right-color: transparent;
-        border-radius: 25px;
-        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
-        animation: rotate_pacman_half_down .5s 0s infinite;
-        margin-top: -50px;
-    }
-    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
 
-    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+public:
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
-    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+private slots:
+    void keyPressEvent(QKeyEvent *key);
 
-    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
-    
-    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+    void addTextInLineEdit(QString text);
 
-    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
-    
-   
-    .loading-image div:nth-child(3),
-    .loading-image div:nth-child(4),
-    .loading-image div:nth-child(5),
-    .loading-image div:nth-child(6){
-        background-color: #49b1f5;
-        width: 15px;
-        height: 15px;
-        border-radius: 100%;
-        margin: 2px;
-        width: 10px;
-        height: 10px;
-        position: absolute;
-        transform: translateY(-6.25px);
-        top: 25px;
-        left: 100px;
-    }
-    .loading-text{
-        margin-bottom: 20vh;
-        text-align: center;
-        color: #2c3e50;
-        font-size: 2rem;
-        box-sizing: border-box;
-        padding: 0 10px;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    @media only screen and (max-width: 500px) {
-         .loading-text{
-            font-size: 1.5rem;
-         }
-    }
-    .fadeout {
-        opacity: 0;
-        filter: alpha(opacity=0);
-    }
-    /* logo出现动画 */
-    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
-    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
- &lt;/style>
- &lt;script>
-(function () {
-    const loaded = function(){
-       setTimeout(function(){
-            const loader = document.getElementById("loading-container");
-            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
-            // document.getElementById("body-wrap").style.display="flex";
-            setTimeout(function(){
-                loader.style.display="none";
-            },1000); 
-        },1000);//强制显示loading page 1s  
-    };
-    loaded();
-})()
- &lt;/script>`</span></span><span class="token punctuation">;</span>
-     <span class="token keyword">const</span> injectBody <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
- &lt;div id="loading-container">
-     &lt;p class="loading-text">玩命加载中 . . . &lt;/p> 
-     &lt;div class="loading-image">
-         &lt;div>&lt;/div>
-         &lt;div>&lt;/div>
-         &lt;div>&lt;/div>
-         &lt;div>&lt;/div> 
-         &lt;div>&lt;/div>
-     &lt;/div>
- &lt;/div>`</span></span><span class="token punctuation">;</span>
-     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/&lt;\/head>/gi</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>htmlContent<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         <span class="token keyword">let</span> lastIndex <span class="token operator">=</span> htmlContent<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token string">'&lt;/head>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-         htmlContent <span class="token operator">=</span> htmlContent<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> lastIndex<span class="token punctuation">)</span> <span class="token operator">+</span> injectHead <span class="token operator">+</span> htmlContent<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>lastIndex<span class="token punctuation">,</span> htmlContent<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">}</span>
-     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/&lt;body>/gi</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>htmlContent<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         <span class="token keyword">let</span> index <span class="token operator">=</span> htmlContent<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'&lt;body>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-         htmlContent <span class="token operator">=</span> htmlContent<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span> <span class="token operator">+</span> injectBody <span class="token operator">+</span> htmlContent<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> htmlContent<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">}</span>
-     <span class="token keyword">return</span> htmlContent<span class="token punctuation">;</span>
- <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    void simpleAction(QString begin, QString end);
+
+    void on_pushButton_history_clicked();
+
+    void on_pushButton_c_clicked();
+
+    void on_pushButton_1_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_0_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_8_clicked();
+
+    void on_pushButton_9_clicked();
+
+    void on_pushButton_dot_clicked();
+
+    void on_pushButton_add_clicked();
+
+    void on_pushButton_mul_clicked();
+
+    void on_pushButton_div_clicked();
+
+    void on_pushButton_sub_clicked();
+
+    void on_pushButton_exp_clicked();
+
+    void on_pushButton_ln_clicked();
+
+    void on_pushButton_backspace_clicked();
+
+    void on_pushButton_equally_clicked();
+
+    void on_pushButton_bracket_left_clicked();
+
+    void on_pushButton_bracket_right_clicked();
+
+    void on_pushButton_pi_clicked();
+
+    void on_pushButton_ctg_clicked();
+
+    void on_pushButton_sin_clicked();
+
+    void on_pushButton_tan_clicked();
+
+    void on_pushButton_cos_clicked();
+
+    void on_pushButton_sqrt_clicked();
+
+    void on_pushButton_mod_clicked();
+
+    void on_pushButton_caret_clicked();
+
+    void on_pushButton_clear_history_clicked();
+
+    void on_actionStandard_changed();
+
+    void on_actionAdvanced_changed();
+
+private:
+    Ui::MainWindow *ui;
+
+    calculator calc;
+
+    QString expression;
+    loan *new_loan;
+
+};
+#endif // MAINWINDOW_H
 </code></pre>
-<p> 可以先在本地运行查看效果。<br> 其中玩命加载中文字也可以换成其他文字，只需将上述代码中对应文字修改即可。</p>
+<h3 id="calculator-h"><a href="#calculator-h" class="headerlink" title="calculator.h"></a>calculator.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef CALCULATOR_H
+#define CALCULATOR_H
+
+#include <QString>
+#include "parser.h"
+
+class calculator
+{
+public:
+    calculator();
+
+    void setExpression(QString str);
+    void setMode(TParser::trigonometryMode mode);
+    void calculate();
+    QString getResult();
+
+    enum err
+    {
+        emptyExpression = 1,
+        divByZero = 2,
+        expressionContainsEqual = 3,
+        failed = 4
+    };
+
+private:
+    QString str1;
+    QString result;
+    TParser parser;
+};
+
+#endif // CALCULATOR_H
+</code></pre>
+<h3 id="loan-h"><a href="#loan-h" class="headerlink" title="loan.h"></a>loan.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef LOAN_H
+#define LOAN_H
+#include <QDialog>
+using namespace std;
+namespace Ui {
+class loan;
+}
+
+class loan : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit loan(QWidget *parent = nullptr);
+    ~loan();
+
+private slots:
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_radioButton_2_clicked();
+
+    void on_radioButton_1_clicked();
+
+private:
+    Ui::loan *ui;
+    QString nian,jin,lv;
+    bool fangshi=true;
+};
+
+#endif // LOAN_H
+</code></pre>
+<h3 id="parser-h"><a href="#parser-h" class="headerlink" title="parser.h"></a>parser.h</h3><pre class=" language-c++"><code class="language-c++">#if !defined(__SOLVER_H)
+#define __SOLVER_H
+#include <string.h>
+#include <vector>
+using namespace std;
+
+#define MAX_EXPR_LEN   255
+#define MAX_TOKEN_LEN  80
+
+struct TParserNode
+{
+   double value;
+   TParserNode *left;
+   TParserNode *right;
+
+   TParserNode(double _value=0.0, TParserNode *_left=NULL, TParserNode *_right=NULL)
+      { value = _value; left = _left; right = _right; }
+};
+
+struct TError
+{
+   char *error;
+   int pos;
+
+   TError() {};
+   TError(char *_error, int _pos) { error=_error; pos=_pos; }
+};
+
+class TParser
+{
+  private:
+   TParserNode *root;
+   char *expr;
+   char curToken[MAX_TOKEN_LEN];
+   enum { PARSER_PLUS, PARSER_MINUS, PARSER_MULTIPLY, PARSER_DIVIDE, PARSER_PERCENT, PARSER_POWER,
+          PARSER_SIN, PARSER_COS, PARSER_TG, PARSER_CTG,PARSER_EXP, PARSER_LG, PARSER_LN, PARSER_SQRT,
+          PARSER_X, PARSER_L_BRACKET, PARSER_R_BRACKET,PARSER_PI, PARSER_NUMBER, PARSER_END } typToken;
+   int pos;
+
+   const double *x;
+   double result;
+
+   vector<TParserNode *> history;
+
+  private:
+   TParserNode *CreateNode(double _value=0.0, TParserNode *_left=NULL, TParserNode *_right=NULL);
+
+   TParserNode *Expr(void);
+   TParserNode *Expr1(void);
+   TParserNode *Expr2(void);
+   TParserNode *Expr3(void);
+   TParserNode *Expr4(void);
+   TParserNode *Expr5(void);
+
+   bool GetToken(void);
+   bool IsDelim(void) { return (strchr("+-*/%^()", expr[pos])!=NULL); }
+   bool IsLetter(void) { return ((expr[pos]>='a' && expr[pos]<='z') ||
+                                 (expr[pos]>='A' && expr[pos]<='Z')); }
+   bool IsDigit(void) { return (expr[pos]>='0' && expr[pos]<='9'); }
+   bool IsPoint(void) { return (expr[pos]=='.'); }
+
+   double CalcTree(TParserNode *tree);
+   void  DelTree(TParserNode *tree);
+
+   void SendError(int errNum);
+
+  public:
+   TParser() { result = 0.0; x = NULL; root = NULL; }
+   ~TParser() { DelTree(root); root=NULL; }
+   void SetX(const double *_x) { x=_x; }
+
+   bool Compile(char *expr);
+   void Decompile() { DelTree(root); root=NULL; }
+
+   double Evaluate();
+   double Evaluate(double *_x) { SetX(_x); return Evaluate(); }
+   double Evaluate(double x, ...) { SetX(&x); return Evaluate(); }
+
+   double GetResult(void) { return result; }
+
+
+   enum trigonometryMode {
+       Radians = 1,
+       Degrees = 2
+   };
+
+   void setTrigonometryMode(trigonometryMode setMode);
+
+  private:
+   trigonometryMode mode = Radians;
+};
+
+#endif
+</code></pre>
+<h2 id="2-具体实现函数"><a href="#2-具体实现函数" class="headerlink" title="2.具体实现函数"></a>2.具体实现函数</h2><h3 id="mainwindow-cpp"><a href="#mainwindow-cpp" class="headerlink" title="mainwindow.cpp"></a>mainwindow.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    ui->textEdit_history->setVisible(false);
+    ui->pushButton_clear_history->setVisible(false);
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *key)
+{
+    int keyCode;
+    keyCode=key->key();
+    switch (keyCode)
+    {
+    case Qt::Key_0:
+        on_pushButton_0_clicked();
+        break;
+    case Qt::Key_1:
+        on_pushButton_1_clicked();
+        break;
+    case Qt::Key_2:
+        on_pushButton_2_clicked();
+        break;
+    case Qt::Key_3:
+        on_pushButton_3_clicked();
+        break;
+    case Qt::Key_4:
+        on_pushButton_4_clicked();
+        break;
+    case Qt::Key_5:
+        on_pushButton_5_clicked();
+        break;
+    case Qt::Key_6:
+        on_pushButton_6_clicked();
+        break;
+    case Qt::Key_7:
+        on_pushButton_7_clicked();
+        break;
+    case Qt::Key_8:
+        on_pushButton_8_clicked();
+        break;
+    case Qt::Key_9:
+        on_pushButton_9_clicked();
+        break;
+    case Qt::Key_Backspace:
+        on_pushButton_backspace_clicked();
+        break;
+    case Qt::Key_Period:
+        on_pushButton_dot_clicked();
+        break;
+    case Qt::Key_Plus:
+        on_pushButton_add_clicked();
+        break;
+    case Qt::Key_Minus:
+        on_pushButton_sub_clicked();
+        break;
+    case Qt::Key_Enter:
+        on_pushButton_equally_clicked();
+        break;
+    case Qt::Key_Equal:
+        on_pushButton_equally_clicked();
+        break;
+    case Qt::Key_ParenLeft:
+        on_pushButton_bracket_left_clicked();
+        break;
+    case Qt::Key_ParenRight:
+        on_pushButton_bracket_right_clicked();
+        break;
+    case Qt::Key_AsciiCircum:
+        on_pushButton_caret_clicked();
+        break;
+    case Qt::Key_Slash:
+        on_pushButton_div_clicked();
+        break;
+    case Qt::Key_multiply:
+        on_pushButton_mul_clicked();
+        break;
+    }
+}
+
+void MainWindow::addTextInLineEdit(QString text)
+{
+    if(ui->lineEdit_expression->text() == "" || ui->lineEdit_expression->text() == "0")
+        ui->lineEdit_expression->setText(text);
+    else
+        ui->lineEdit_expression->insert(text);
+}
+
+void MainWindow::simpleAction(QString begin, QString end)
+{
+    expression=begin+ui->lineEdit_expression->text()+end;
+    on_pushButton_equally_clicked();
+}
+
+void MainWindow::on_pushButton_history_clicked()
+{
+    ui->textEdit_history->setVisible(!ui->textEdit_history->isVisible());
+    ui->pushButton_clear_history->setVisible(!ui->pushButton_clear_history->isVisible());
+}
+
+void MainWindow::on_pushButton_c_clicked()
+{
+    ui->lineEdit_expression->setText("0");
+}
+
+void MainWindow::on_pushButton_0_clicked()
+{
+    addTextInLineEdit("0");
+}
+
+void MainWindow::on_pushButton_1_clicked()
+{
+    addTextInLineEdit("1");
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    addTextInLineEdit("2");
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    addTextInLineEdit("3");
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    addTextInLineEdit("4");
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    addTextInLineEdit("5");
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    addTextInLineEdit("6");
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    addTextInLineEdit("7");
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    addTextInLineEdit("8");
+}
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    addTextInLineEdit("9");
+}
+
+void MainWindow::on_pushButton_dot_clicked()
+{
+    ui->lineEdit_expression->insert(".");
+}
+
+void MainWindow::on_pushButton_add_clicked()
+{
+    ui->lineEdit_expression->insert("+");
+}
+
+void MainWindow::on_pushButton_sub_clicked()
+{
+    ui->lineEdit_expression->insert("-");
+}
+
+void MainWindow::on_pushButton_mul_clicked()
+{
+    ui->lineEdit_expression->insert("*");
+}
+
+void MainWindow::on_pushButton_div_clicked()
+{
+    ui->lineEdit_expression->insert("/");
+}
+
+void MainWindow::on_pushButton_mod_clicked()
+{
+    ui->lineEdit_expression->insert("%");
+}
+
+void MainWindow::on_pushButton_backspace_clicked()
+{
+    if(ui->lineEdit_expression->text()!="0")
+    {
+        int position = ui->lineEdit_expression->cursorPosition();
+        QString temp;
+        temp=ui->lineEdit_expression->text();
+        temp.remove(ui->lineEdit_expression->cursorPosition()-1,1);
+        if(temp!="")
+        {
+            ui->lineEdit_expression->setText(temp);
+            ui->lineEdit_expression->setCursorPosition(position-1);
+        }
+        else
+            ui->lineEdit_expression->setText("0");
+    }
+}
+
+void MainWindow::on_pushButton_equally_clicked()
+{
+    try {
+        TParser::trigonometryMode mode;
+        if(ui->radioButton_radians->isChecked()) mode = TParser::Radians;
+        else mode = TParser::Degrees;
+        calc.setMode(mode);
+        if(ui->actionAdvanced->isChecked())
+            calc.setExpression(ui->lineEdit_expression->text());
+        else
+        {
+            if(expression.isEmpty()) expression = ui->lineEdit_expression->text();
+            calc.setExpression(expression);
+        }
+        calc.calculate();
+        ui->label_Result->setText(calc.getResult());
+        if(ui->actionAdvanced->isChecked())
+            ui->textEdit_history->append(ui->lineEdit_expression->text() + "=" + calc.getResult());
+        else
+        {
+            ui->textEdit_history->append(expression + "=" + calc.getResult());
+            expression.clear();
+        }
+    } catch (calculator::err er) {
+        switch (er) {
+            case 1:
+                ui->label_Result->setText("Empty expression");
+                break;
+            case 2:
+                ui->label_Result->setText("Div by zero");
+                break;
+            case 3:
+                ui->label_Result->setText("Expression contains equal sign");
+                break;
+            case 4:
+                ui->label_Result->setText("Something went wrong");
+                break;
+        }
+    }
+}
+
+void MainWindow::on_pushButton_bracket_left_clicked()
+{
+    addTextInLineEdit("(");
+}
+
+void MainWindow::on_pushButton_bracket_right_clicked()
+{
+    addTextInLineEdit(")");
+}
+
+void MainWindow::on_pushButton_exp_clicked()
+{
+    if(ui->actionAdvanced->isChecked())
+    {
+        addTextInLineEdit("exp()");
+        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
+    } else simpleAction("exp(",")");
+}
+
+void MainWindow::on_pushButton_ln_clicked()
+{
+    if(ui->actionAdvanced->isChecked())
+    {
+        addTextInLineEdit("ln()");
+        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
+    } else simpleAction("ln(",")");
+}
+
+void MainWindow::on_pushButton_pi_clicked()
+{
+    addTextInLineEdit("pi");
+}
+
+void MainWindow::on_pushButton_tan_clicked()
+{
+    if(ui->actionAdvanced->isChecked())
+    {
+        addTextInLineEdit("tg()");
+        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
+    } else simpleAction("tg(",")");
+}
+
+void MainWindow::on_pushButton_ctg_clicked()
+{
+    if(ui->actionAdvanced->isChecked())
+    {
+        addTextInLineEdit("ctg()");
+        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
+    }else simpleAction("ctg(",")");
+}
+
+void MainWindow::on_pushButton_sin_clicked()
+{
+    if(ui->actionAdvanced->isChecked())
+    {
+        addTextInLineEdit("sin()");
+        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
+    } else simpleAction("sin(",")");
+}
+
+void MainWindow::on_pushButton_cos_clicked()
+{
+    if(ui->actionAdvanced->isChecked())
+    {
+        addTextInLineEdit("cos()");
+        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
+    } else simpleAction("cos(",")");
+}
+
+void MainWindow::on_pushButton_sqrt_clicked()
+{
+    if(ui->actionAdvanced->isChecked())
+    {
+        addTextInLineEdit("sqrt()");
+        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
+    } else simpleAction("sqrt(",")");
+}
+
+void MainWindow::on_pushButton_caret_clicked()
+{
+    ui->lineEdit_expression->insert("^");
+}
+
+void MainWindow::on_pushButton_clear_history_clicked()
+{
+    ui->textEdit_history->clear();
+}
+
+void MainWindow::on_actionStandard_changed()
+{
+    ui->actionAdvanced->setChecked(!ui->actionStandard->isChecked());
+}
+
+void MainWindow::on_actionAdvanced_changed()
+{
+    ui->actionStandard->setChecked(!ui->actionAdvanced->isChecked());
+    new_loan = new loan;
+    new_loan->setWindowTitle("贷款计算器 by hhb");
+    new_loan->show();
+}
+</code></pre>
+<p>###calculator.cpp</p>
+<pre class=" language-c++"><code class="language-c++">#include "calculator.h"
+calculator::calculator()
+{
+    TParser::trigonometryMode mode = TParser::Radians;
+    parser.setTrigonometryMode(mode);
+}
+
+void calculator::setExpression(QString str)
+{
+    str1 = str;
+}
+
+void calculator::setMode(TParser::trigonometryMode mode)
+{
+    parser.setTrigonometryMode(mode);
+}
+
+void calculator::calculate()
+{
+    if(str1.isEmpty()) throw err(1);
+    if(str1.contains('=')) throw err(3);
+    QByteArray ba = str1.toLatin1();
+    char *c_str2 = ba.data();
+    parser.Decompile();
+    try {
+        parser.Compile(c_str2);
+        parser.Evaluate();
+    } catch (TError) {
+        throw err(4);
+    }
+    result = QString::number(parser.GetResult());
+    if(result == "inf") throw err(2);
+}
+
+QString calculator::getResult()
+{
+    return result;
+}
+</code></pre>
+<h3 id="loan-cpp"><a href="#loan-cpp" class="headerlink" title="loan.cpp"></a>loan.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "loan.h"
+#include "ui_loan.h"
+#include"qmath.h"
+#include <QString>
+using namespace std;
+
+loan::loan(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::loan)
+{
+    ui->setupUi(this);
+}
+
+loan::~loan()
+{
+    delete ui;
+}
+
+
+
+void loan::on_pushButton_clicked()
+{
+    QString nian = ui->lineEdit_1->text();
+    jin=ui->lineEdit_2->text();
+    lv=ui->lineEdit_3->text();
+    double n=nian.toDouble();
+    double j=10000*jin.toDouble();
+    double l=0.01*lv.toDouble();
+    if(fangshi)
+    {
+    double yj1=j*l*pow((1+l),12*n)/(pow((1+l),12*n)-1);
+    double lx1=12*yj1-j;
+    double hk1=(lx1+j);
+    ui->lineEdit_4->setText(tr("%1").arg(yj1));
+    ui->lineEdit_5->setText(tr("%1").arg(lx1));
+    ui->lineEdit_6->setText(tr("%1").arg(hk1));}
+    else  {
+        double lx1=((j/(12*n)+j*l)+j/(12*n)*(1+l))/2*(12*n)-j;
+        double hk1=j+lx1;
+        double yj1=hk1/(12*n);
+        ui->lineEdit_4->setText(tr("%1").arg(yj1));
+        ui->lineEdit_5->setText(tr("%1").arg(lx1));
+        ui->lineEdit_6->setText(tr("%1").arg(hk1));
+    }
+    }
+void loan::on_pushButton_2_clicked()
+{
+    ui->lineEdit_1->clear();
+    ui->lineEdit_2->clear();
+    ui->lineEdit_3->clear();
+    ui->lineEdit_4->clear();
+    ui->lineEdit_5->clear();
+    ui->lineEdit_6->clear();
+}
+
+void loan::on_radioButton_2_clicked()
+{
+    fangshi=true;
+}
+
+void loan::on_radioButton_1_clicked()
+{
+    fangshi=false;
+}
+</code></pre>
+<h3 id="parser-cpp"><a href="#parser-cpp" class="headerlink" title="parser.cpp"></a>parser.cpp</h3><pre class=" language-c++"><code class="language-c++">#include <math.h>
+#include "parser.h"
+
+#define OP_PLUS          0
+#define OP_MINUS         1
+#define OP_MULTIPLY      2
+#define OP_DIVIDE        3
+#define OP_PERCENT       4
+#define OP_POWER         5
+#define OP_UMINUS        6
+#define OP_SIN           7
+#define OP_COS           8
+#define OP_TG            9
+#define OP_CTG           10
+#define OP_EXP           11
+#define OP_LG            12
+#define OP_LN            13
+#define OP__PERCENT      14
+#define OP_SQRT          15
+#define M_PI             3.141592653589
+TParserNode *TParser::CreateNode(double _value, TParserNode *_left, TParserNode *_right)
+{
+   TParserNode *pNode = new TParserNode(_value, _left, _right);
+   history.push_back(pNode);
+   return pNode;
+}
+
+void TParser::SendError(int errNum)
+{
+   static char *errs[7] = { NULL,
+                            NULL,
+                            "Unexpected end of expression",
+                            "End of expression expected",
+                            "'(' or '[' expected",
+                            "')' or ']' expected",
+                            NULL
+                         };
+   static char buffer[80];
+   
+   int len = strlen(curToken);
+   
+   if(*curToken=='\0')
+      strcpy(curToken, "EOL");
+
+   switch(errNum)
+   {
+      case 0:
+         errs[0] = buffer;
+         break;
+
+      case 1:
+         errs[1] = buffer;
+         break;
+
+      case 6:
+         errs[6] = buffer;
+         break;
+   }
+
+   TError error(errs[errNum], pos-len);
+
+   for(int i=0; i<history.size(); i++)
+      delete history[i];
+   history.clear();
+
+   root = NULL;
+
+   throw error;
+
+   return;
+}
+   
+bool TParser::GetToken(void)
+{
+   *curToken = '\0';
+   
+   while(expr[pos]==' ') pos++;
+   
+   if(expr[pos]=='\0')
+   {
+      curToken[0] = '\0';
+      typToken = PARSER_END;
+      return true;
+   }
+   else if(IsDelim())
+   {
+      curToken[0] = expr[pos++];
+      curToken[1] = '\0';
+      switch(*curToken)
+      {
+         case '+': typToken = PARSER_PLUS; return true;
+         case '-': typToken = PARSER_MINUS; return true;
+         case '*': typToken = PARSER_MULTIPLY; return true;
+         case '/': typToken = PARSER_DIVIDE; return true;
+         case '%': typToken = PARSER_PERCENT; return true;
+         case '^': typToken = PARSER_POWER; return true;
+         case '(': typToken = PARSER_L_BRACKET; return true;
+         case ')': typToken = PARSER_R_BRACKET; return true;
+      }
+   }
+   else if(IsLetter())
+   {
+      int i=0;
+      while(IsLetter()) curToken[i++] = expr[pos++];
+      curToken[i] = '\0';
+
+      int len = strlen(curToken);
+      for(i=0; i<len; i++)
+         if(curToken[i]>='A' && curToken[i]<='Z')
+            curToken[i] += 'a' - 'A';
+
+      else if(!strcmp(curToken, "pi"))     { typToken = PARSER_PI; return true; }
+      else if(!strcmp(curToken, "sin"))    { typToken = PARSER_SIN; return true; }
+      else if(!strcmp(curToken, "cos"))    { typToken = PARSER_COS; return true; }
+      else if(!strcmp(curToken, "tg"))     { typToken = PARSER_TG; return true; }
+      else if(!strcmp(curToken, "ctg"))    { typToken = PARSER_CTG; return true; }
+      else if(!strcmp(curToken, "exp"))    { typToken = PARSER_EXP; return true; }
+      else if(!strcmp(curToken, "lg"))     { typToken = PARSER_LG; return true; }
+      else if(!strcmp(curToken, "ln"))     { typToken = PARSER_LN; return true; }
+      else if(!strcmp(curToken, "sqrt"))   { typToken = PARSER_SQRT; return true; }
+      else SendError(0);
+   }
+   else if(IsDigit() || IsPoint())
+   {
+      int i=0;
+      while(IsDigit()) curToken[i++] = expr[pos++];
+      if(IsPoint())
+      {
+         curToken[i++] = expr[pos++];
+         while(IsDigit()) curToken[i++] = expr[pos++];
+      }
+      curToken[i] = '\0';
+      typToken = PARSER_NUMBER;
+      return true;
+   }
+   else
+   {
+      curToken[0] = expr[pos++];
+      curToken[1] = '\0';
+      SendError(1);
+   }
+
+   return false;
+}      
+
+bool TParser::Compile(char *_expr)
+{
+   pos = 0;
+   expr = _expr;
+   *curToken = '\0';
+   if(root!=NULL)
+   {
+      DelTree(root);
+      root = NULL;
+   }
+
+   history.clear();
+
+   GetToken();
+   if(typToken==PARSER_END) SendError(2);
+   root = Expr();
+   if(typToken!=PARSER_END) SendError(3);
+
+   history.clear();
+
+   return true;
+}
+
+TParserNode *TParser::Expr(void)
+{
+   TParserNode *temp = Expr1();
+
+   while(1)
+   {
+      if(typToken==PARSER_PLUS)
+      {
+         GetToken();
+         temp = CreateNode(OP_PLUS, temp, Expr1());
+      }
+      else if(typToken==PARSER_MINUS)
+      {
+         GetToken();
+         temp = CreateNode(OP_MINUS, temp, Expr1());
+      }
+      else break;
+   }
+
+   return temp;
+}
+   
+TParserNode *TParser::Expr1(void)
+{
+   TParserNode *temp = Expr2();
+
+   while(1)
+   {
+      if(typToken==PARSER_MULTIPLY)
+      {
+         GetToken();
+         temp = CreateNode(OP_MULTIPLY, temp, Expr2());
+      }
+      else if(typToken==PARSER_DIVIDE)
+      {
+         GetToken();
+         temp = CreateNode(OP_DIVIDE, temp, Expr2());
+      }
+      else if(typToken==PARSER_PERCENT)
+      {
+         GetToken();
+         temp = CreateNode(OP_PERCENT, temp, Expr2());
+      }
+      else break;
+   }
+
+   return temp;
+}
+
+TParserNode *TParser::Expr2(void)
+{
+   TParserNode *temp = Expr3();
+
+   while(1)
+   {
+      if(typToken==PARSER_POWER)
+      {
+         GetToken();
+         temp = CreateNode(OP_POWER, temp, Expr2());
+      }
+      else break;
+   }
+
+   return temp;
+}
+
+TParserNode *TParser::Expr3(void)
+{
+   TParserNode *temp;
+
+   if(typToken==PARSER_PLUS)
+   {
+      GetToken();
+      temp = Expr4();
+   }
+   else if(typToken==PARSER_MINUS)
+   {
+      GetToken();
+      temp = CreateNode(OP_UMINUS, Expr4());
+   }
+   else
+      temp = Expr4();
+
+   return temp;      
+}
+
+TParserNode *TParser::Expr4(void)
+{
+   TParserNode *temp;
+
+   if(typToken>=PARSER_SIN && typToken<=PARSER_X)
+   {
+      temp = CreateNode(OP_SIN-PARSER_SIN+typToken);
+      GetToken();
+      if(typToken!=PARSER_L_BRACKET) SendError(4);
+      GetToken();
+      temp->left = Expr();
+      if(typToken!=PARSER_R_BRACKET) SendError(5);
+      GetToken();
+   }
+   else
+      temp = Expr5();
+
+   return temp;
+}
+
+TParserNode *TParser::Expr5(void)
+{
+   TParserNode *temp;
+   
+   switch(typToken)
+   {
+      case PARSER_NUMBER:
+         temp = CreateNode((double)atof(curToken));
+         GetToken();
+         break;
+
+      case PARSER_PI:
+         temp = CreateNode((double)M_PI);
+         GetToken();
+         break;
+
+      case PARSER_L_BRACKET:
+         GetToken();
+         temp = Expr();
+         if(typToken!=PARSER_R_BRACKET) SendError(5);
+         GetToken();
+         break;
+
+      default:
+         SendError(6);
+   }
+
+   return temp;         
+}
+
+double TParser::Evaluate(void)
+{
+   result = CalcTree(root);
+   return result;
+}
+
+double TParser::CalcTree(TParserNode *tree)
+{
+   static double temp;
+   
+   if(tree->left==NULL && tree->right==NULL)
+      return tree->value;
+   else
+      switch((int)tree->value)
+      {
+         case OP_PLUS:
+            return CalcTree(tree->left)+CalcTree(tree->right);
+
+         case OP_MINUS:
+            return CalcTree(tree->left)-CalcTree(tree->right);
+
+         case OP_MULTIPLY:
+            return CalcTree(tree->left)*CalcTree(tree->right);
+
+         case OP_DIVIDE:
+            return CalcTree(tree->left)/CalcTree(tree->right);
+
+         case OP_PERCENT:
+            return (int)CalcTree(tree->left)%(int)CalcTree(tree->right);
+
+         case OP_POWER:
+            return (double)pow(CalcTree(tree->left),CalcTree(tree->right));
+
+         case OP_UMINUS:
+            return -CalcTree(tree->left);
+
+         case OP_SIN:
+            if(mode == Radians)
+                return sin(CalcTree(tree->left));
+            else
+                return sin(CalcTree(tree->left)*(M_PI/180));
+
+         case OP_COS:
+            if(mode == Radians)
+                return cos(CalcTree(tree->left));
+            else
+                return cos(CalcTree(tree->left)*(M_PI/180));
+
+         case OP_TG:
+            if(mode == Radians)
+                return tan(CalcTree(tree->left));
+            else
+                return tan(CalcTree(tree->left)*(M_PI/180));
+
+         case OP_CTG:
+            if(mode == Radians)
+                return 1.0/tan(CalcTree(tree->left));
+            else
+                return 1.0/tan(CalcTree(tree->left)*(M_PI/180));
+
+         case OP_EXP:
+            return exp(CalcTree(tree->left));
+
+         case OP_LG:
+            return log10(CalcTree(tree->left));
+
+         case OP_LN:
+            return log(CalcTree(tree->left));
+
+         case OP_SQRT:
+            return sqrt(CalcTree(tree->left));
+      }
+
+   return 0;
+}
+
+void TParser::DelTree(TParserNode *tree)
+{
+   if(tree==NULL) return;
+
+   DelTree(tree->left);
+   DelTree(tree->right);
+
+   delete tree;
+
+   return;
+}
+
+void TParser::setTrigonometryMode(TParser::trigonometryMode setMode)
+{
+    mode = setMode;
+}
+</code></pre>
+<h3 id="main-cpp"><a href="#main-cpp" class="headerlink" title="main.cpp"></a>main.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "mainwindow.h"
+#include <QApplication>
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.setWindowTitle("calculator by hhb");
+    w.show();
+    return a.exec();
+}
+</code></pre>
+<p>需要完整源码文件的可以留下联系方式。</p>
 
                 
             </div>
@@ -868,7 +1844,7 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">浅航博懿</a>
+                    <a href="/about" rel="external nofollow noreferrer">莉粑粑</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -878,7 +1854,7 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://huhangbo.cn/2021/02/23/tian-jia-loading-pages/">http://huhangbo.cn/2021/02/23/tian-jia-loading-pages/</a>
+                    <a href="http://huhangbo.cn/2021/02/27/qt-calculator/">http://huhangbo.cn/2021/02/27/qt-calculator/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -891,7 +1867,7 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">浅航博懿</a>
+                    <a href="/about" target="_blank">莉粑粑</a>
                     !
                 </span>
             </div>
@@ -916,12 +1892,8 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/JavaScript/">
-                                    <span class="chip bg-color">JavaScript</span>
-                                </a>
-                            
-                                <a href="/tags/CSS/">
-                                    <span class="chip bg-color">CSS</span>
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C++</span>
                                 </a>
                             
                         </div>
@@ -1354,9 +2326,10 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/02/27/qt-calculator/">
                     <div class="card-image">
@@ -1374,9 +2347,9 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1389,6 +2362,7 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1404,7 +2378,7 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2021/02/23/tian-jia-loading-pages/">
@@ -1438,7 +2412,6 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
