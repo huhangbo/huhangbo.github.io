@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://huhangbo.cn/2021/02/23/tian-jia-loading-pages/</loc>
+    <loc>http://huhangbo.cn/2021/02/27/qt-word/</loc>
     
     <lastmod>2021-02-27</lastmod>
     
@@ -10,6 +10,13 @@
   
   <url>
     <loc>http://huhangbo.cn/2021/02/27/qt-calculator/</loc>
+    
+    <lastmod>2021-02-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://huhangbo.cn/2021/02/23/tian-jia-loading-pages/</loc>
     
     <lastmod>2021-02-27</lastmod>
     
@@ -74,7 +81,7 @@
 
   <url>
     <loc>http://huhangbo.cn/</loc>
-    <lastmod>2021-02-27</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -82,21 +89,21 @@
   
   <url>
     <loc>http://huhangbo.cn/tags/C/</loc>
-    <lastmod>2021-02-27</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://huhangbo.cn/tags/JavaScript/</loc>
-    <lastmod>2021-02-27</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://huhangbo.cn/tags/CSS/</loc>
-    <lastmod>2021-02-27</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -105,14 +112,14 @@
   
   <url>
     <loc>http://huhangbo.cn/categories/Qt/</loc>
-    <lastmod>2021-02-27</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://huhangbo.cn/categories/Hexo/</loc>
-    <lastmod>2021-02-27</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

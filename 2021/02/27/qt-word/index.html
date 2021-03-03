@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Qt-Calculator, 浅航博懿的个人网站">
+    <meta name="keywords" content="Qt-word, 浅航博懿的个人网站">
     <meta name="description" content="Live a good life, write some good code !!!">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Qt-Calculator | 浅航博懿</title>
+    <title>Qt-word | 浅航博懿</title>
     <link rel="icon" type="image/png" href="/logo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Qt-Calculator</h1>
+                    <h1 class="description center-align post-title">Qt-word</h1>
                 </div>
             </div>
         </div>
@@ -665,14 +665,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    3.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    18 分
                 </div>
                 
 
@@ -687,1147 +687,1491 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <script src="\assets\js\APlayer.min.js"> </script><p>用<strong>Qt</strong>做的计算器</p>
+                <script src="\assets\js\APlayer.min.js"> </script><p>Qt做的一个多文本编辑器</p>
 <a id="more"></a>
-<p>大二的时候第一次接触Qt，用Qt做了一个计算器</p>
-<h1 id="一、软件界面"><a href="#一、软件界面" class="headerlink" title="一、软件界面"></a>一、软件界面</h1><p>主界面<br><img src="https://huhangbo.gitee.io/huhangbo-imgs/Qt/Calculator/1.png" title="软件主界面"></p>
-<p>贷款计算器<br><img src="https://huhangbo.gitee.io/huhangbo-imgs/Qt/Calculator/2.png" title="贷款计算器"></p>
-<h1 id="二、代码"><a href="#二、代码" class="headerlink" title="二、代码"></a>二、代码</h1><p><img src="https://huhangbo.gitee.io/huhangbo-imgs/Qt/Calculator/3.png"></p>
-<h2 id="1-初始化文件"><a href="#1-初始化文件" class="headerlink" title="1.初始化文件"></a>1.初始化文件</h2><h3 id="mainwindow-h"><a href="#mainwindow-h" class="headerlink" title="mainwindow.h"></a>mainwindow.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+<p>做多文本编辑器主要利用Qt自带库函数，调用Qt库中窗口来实现。<br>具体文件、保存、打印、编辑、字体、段落、颜色、查找和替换等功能。<br><strong>注意</strong>：如果要实现多窗口编辑需要使用MDI这个控件</p>
+<h1 id="一、软件界面"><a href="#一、软件界面" class="headerlink" title="一、软件界面"></a>一、软件界面</h1><p>主界面<br><img src="https://huhangbo.gitee.io/huhangbo-imgs/Qt/Word/1.png" title="软件主界面"></p>
+<p>查找与替换窗口<br><img src="https://huhangbo.gitee.io/huhangbo-imgs/Qt/Word/2.png" title="查找与替换"></p>
+<h1 id="二、代码"><a href="#二、代码" class="headerlink" title="二、代码"></a>二、代码</h1><p><img src="https://huhangbo.gitee.io/huhangbo-imgs/Qt/Word/3.png"></p>
+<h2 id="初始化文件"><a href="#初始化文件" class="headerlink" title="初始化文件"></a>初始化文件</h2><h3 id="myword-h"><a href="#myword-h" class="headerlink" title="myword.h"></a>myword.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef MYWORD_H
+#define MYWORD_H
 
 #include <QMainWindow>
-#include <QKeyEvent>
-#include "calculator.h"
-#include"loan.h"
+#include <QInputDialog>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QPrintPreviewDialog>
+#include <FindDialog.h>
+#include <ReplaceDialog.h>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+class MyChild;
+class QAction;
+class QMenu;
+class QComboBox;
+class QFontComboBox;
+class QMdiArea;
+class QMdiSubWindow;
+class QSignalMapper;
+class FindDialog;
 
-class MainWindow : public QMainWindow
+class MyWord : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
+    MyWord(QWidget *parent = 0);
+    ~MyWord();
+protected:
+    void closeEvent(QCloseEvent *event);
 private slots:
-    void keyPressEvent(QKeyEvent *key);
+    void fileNew();
+    void fileOpen();
+    void fileSave();
+    void fileSaveAs();
+    void filePrint();
+    void filePrintPreview();
+    void printPreview(QPrinter *);
+    void undo();
+    void redo();
+    void cut();
+    void copy();
+    void paste();
+    void about();
+    void textBold();
+    void textItalic();
+    void textUnderline();
+    void textAlign(QAction *a);
+    void textStyle(int styleIndex);
+    void textFamily(const QString &f);
+    void textSize(const QString &p);
+    void textColor();
+    void updateMenus();
+    void updateWindowMenu();
+    void count(); //字数统计
+    void countt();//统计字符串
+    void find();
+    void replace();//替换  
+    int Num0fstr(const char *Mstr, const char *substr);
 
-    void addTextInLineEdit(QString text);
 
-    void simpleAction(QString begin, QString end);
-
-    void on_pushButton_history_clicked();
-
-    void on_pushButton_c_clicked();
-
-    void on_pushButton_1_clicked();
-
-    void on_pushButton_2_clicked();
-
-    void on_pushButton_3_clicked();
-
-    void on_pushButton_0_clicked();
-
-    void on_pushButton_4_clicked();
-
-    void on_pushButton_5_clicked();
-
-    void on_pushButton_6_clicked();
-
-    void on_pushButton_7_clicked();
-
-    void on_pushButton_8_clicked();
-
-    void on_pushButton_9_clicked();
-
-    void on_pushButton_dot_clicked();
-
-    void on_pushButton_add_clicked();
-
-    void on_pushButton_mul_clicked();
-
-    void on_pushButton_div_clicked();
-
-    void on_pushButton_sub_clicked();
-
-    void on_pushButton_exp_clicked();
-
-    void on_pushButton_ln_clicked();
-
-    void on_pushButton_backspace_clicked();
-
-    void on_pushButton_equally_clicked();
-
-    void on_pushButton_bracket_left_clicked();
-
-    void on_pushButton_bracket_right_clicked();
-
-    void on_pushButton_pi_clicked();
-
-    void on_pushButton_ctg_clicked();
-
-    void on_pushButton_sin_clicked();
-
-    void on_pushButton_tan_clicked();
-
-    void on_pushButton_cos_clicked();
-
-    void on_pushButton_sqrt_clicked();
-
-    void on_pushButton_mod_clicked();
-
-    void on_pushButton_caret_clicked();
-
-    void on_pushButton_clear_history_clicked();
-
-    void on_actionStandard_changed();
-
-    void on_actionAdvanced_changed();
-
+    MyChild *createMyChild();
+    void setActiveSubWindow(QWidget *window);
 private:
-    Ui::MainWindow *ui;
+    void createActions();
+    void createMenus();
+    void createToolBars();
+    void createStatusBar();
+    void enabledText();         //使得【格式】下的各个子菜单项可用
+    void fontChanged(const QFont &f);
+    void colorChanged(const QColor &c);
+    void alignmentChanged(Qt::Alignment a);
 
-    calculator calc;
 
-    QString expression;
-    loan *new_loan;
+    FindDialog *new_FindDialog;
+    ReplaceDialog *new_ReplaceDialog;
+    MyChild *activeMyChild();
+    QMdiSubWindow *findMyChild(const QString &fileName);    
+
+    QMdiArea *mdiArea;
+    QSignalMapper *windowMapper;
+    //菜单
+    QMenu *fileMenu;
+    QMenu *editMenu;
+    QMenu *formatMenu;
+    QMenu *fontMenu;            //子菜单
+    QMenu *alignMenu;           //子菜单
+    QMenu *windowMenu;
+    QMenu *helpMenu;
+    //工具栏
+    QToolBar *fileToolBar;
+    QToolBar *editToolBar;
+    QToolBar *formatToolBar;
+    QToolBar *comboToolBar;
+    QComboBox *comboStyle;      //子控件
+    QFontComboBox *comboFont;   //子控件
+    QComboBox *comboSize;       //子控件
+    //动作(Action)
+    QAction *newAct;            //【文件】主菜单
+    QAction *openAct;
+    QAction *saveAct;
+    QAction *saveAsAct;
+    QAction *printAct;
+    QAction *printPreviewAct;
+    QAction *exitAct;
+
+    QAction *undoAct;           //【编辑】主菜单
+    QAction *redoAct;
+    QAction *cutAct;
+    QAction *copyAct;
+    QAction *pasteAct;
+    //______________
+    QAction *CountAct;        //字数统计
+    QAction *CountT;         //统计特定字符串
+    QAction *FindAct;
+    QAction *ReplaceAct;
+
+    QAction *boldAct;           //【格式】主菜单
+    QAction *italicAct;
+    QAction *underlineAct;
+    QAction *leftAlignAct;
+    QAction *centerAct;
+    QAction *rightAlignAct;
+    QAction *justifyAct;
+    QAction *colorAct;
+
+    QAction *closeAct;          //【窗口】主菜单
+    QAction *closeAllAct;
+    QAction *tileAct;
+    QAction *cascadeAct;
+    QAction *nextAct;
+    QAction *previousAct;
+    QAction *separatorAct;
+
+    QAction *aboutAct;          //【帮助】主菜单
+    QAction *aboutQtAct;
 
 };
-#endif // MAINWINDOW_H
+
+#endif // MYWORD_H
 </code></pre>
-<h3 id="calculator-h"><a href="#calculator-h" class="headerlink" title="calculator.h"></a>calculator.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef CALCULATOR_H
-#define CALCULATOR_H
+<h3 id="mychild-h"><a href="#mychild-h" class="headerlink" title="mychild.h"></a>mychild.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef MYCHILD_H
+#define MYCHILD_H
 
-#include <QString>
-#include "parser.h"
+#include <QTextEdit>
+#include <QPrinter>
 
-class calculator
+
+class MyChild : public QTextEdit
 {
+    Q_OBJECT
 public:
-    calculator();
-
-    void setExpression(QString str);
-    void setMode(TParser::trigonometryMode mode);
-    void calculate();
-    QString getResult();
-
-    enum err
-    {
-        emptyExpression = 1,
-        divByZero = 2,
-        expressionContainsEqual = 3,
-        failed = 4
-    };
-
+    MyChild();
+    void newFile();
+    bool loadFile(const QString &fileName);
+    bool save();
+    bool saveAs();
+    bool saveFile(QString fileName);
+    QString userFriendlyCurrentFile();
+    QString currentFile() { return curFile; }
+    void mergeFormatOnWordOrSelection(const QTextCharFormat &format);   //格式字体设置
+    void setAlign(int align);                                           //段落对齐设置
+    void setStyle(int style);                                           //段落标号、编号
+protected:
+    void closeEvent(QCloseEvent *event);
+private slots:
+    void documentWasModified();
 private:
-    QString str1;
-    QString result;
-    TParser parser;
+    bool maybeSave();
+    void setCurrentFile(const QString &fileName);
+    QString strippedName(const QString &fullFileName);
+
+    QString curFile;
+    bool isUntitled;
 };
 
-#endif // CALCULATOR_H
+#endif // MYCHILD_H
 </code></pre>
-<h3 id="loan-h"><a href="#loan-h" class="headerlink" title="loan.h"></a>loan.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef LOAN_H
-#define LOAN_H
+<h3 id="FindDialog-h"><a href="#FindDialog-h" class="headerlink" title="FindDialog.h"></a>FindDialog.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef _FINDDIALOG_H_
+#define _FINDDIALOG_H_
+
 #include <QDialog>
-using namespace std;
-namespace Ui {
-class loan;
-}
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <mychild.h>
 
-class loan : public QDialog
+class MyWord;
+
+class FindDialog : public QDialog
 {
     Q_OBJECT
 
+protected:
+    QGroupBox m_radioGrpBx;
+
+    QGridLayout m_layout;
+    QHBoxLayout m_hbLayout;
+
+    QLabel m_findLbl;
+    QLineEdit m_findEdit;
+    QPushButton m_findBtn;
+    QPushButton m_closeBtn;
+    QCheckBox m_matchChkBx;
+    QRadioButton m_forwardBtn;
+    QRadioButton m_backwardBtn;
+
+    QPointer<QPlainTextEdit> m_pText; // FindDialog 聚合使用 QPlainTextEdit
+
+    void initControl();
+    void connectSlot();
+protected slots:
+    void onFindClicked();
+    void onCloseClicked();
 public:
-    explicit loan(QWidget *parent = nullptr);
-    ~loan();
-
-private slots:
-
-    void on_pushButton_clicked();
-
-    void on_pushButton_2_clicked();
-
-    void on_radioButton_2_clicked();
-
-    void on_radioButton_1_clicked();
-
+    explicit FindDialog(QWidget* parent = 0, QPlainTextEdit* pText = 0);
+    void setPlainTextEdit(QPlainTextEdit* pText);
+    QPlainTextEdit* getPlainTextEdit();
+    bool event(QEvent* evt);
 private:
-    Ui::loan *ui;
-    QString nian,jin,lv;
-    bool fangshi=true;
+    MyChild *activeMyChild();
 };
 
-#endif // LOAN_H
+#endif // _FINDDIALOG_H_
 </code></pre>
-<h3 id="parser-h"><a href="#parser-h" class="headerlink" title="parser.h"></a>parser.h</h3><pre class=" language-c++"><code class="language-c++">#if !defined(__SOLVER_H)
-#define __SOLVER_H
-#include <string.h>
-#include <vector>
-using namespace std;
+<h3 id="ReplaceDialog-h"><a href="#ReplaceDialog-h" class="headerlink" title="ReplaceDialog.h"></a>ReplaceDialog.h</h3><pre class=" language-c++"><code class="language-c++">#ifndef _REPLACEDIALOG_H_
+#define _REPLACEDIALOG_H_
 
-#define MAX_EXPR_LEN   255
-#define MAX_TOKEN_LEN  80
+#include "FindDialog.h"
 
-struct TParserNode
+class ReplaceDialog : public FindDialog
 {
-   double value;
-   TParserNode *left;
-   TParserNode *right;
+    Q_OBJECT
 
-   TParserNode(double _value=0.0, TParserNode *_left=NULL, TParserNode *_right=NULL)
-      { value = _value; left = _left; right = _right; }
+protected:
+    QLabel m_replaceLbl;
+    QLineEdit m_replaceEdit;
+    QPushButton m_replaceBtn;
+    QPushButton m_replaceAllBtn;
+
+    void initControl();
+    void connectSlot();
+protected slots:
+    void onReplaceClicked();
+    void onReplaceAllClicked();
+public:
+    explicit ReplaceDialog(QWidget *parent = 0, QPlainTextEdit* pText = 0);
 };
 
-struct TError
-{
-   char *error;
-   int pos;
-
-   TError() {};
-   TError(char *_error, int _pos) { error=_error; pos=_pos; }
-};
-
-class TParser
-{
-  private:
-   TParserNode *root;
-   char *expr;
-   char curToken[MAX_TOKEN_LEN];
-   enum { PARSER_PLUS, PARSER_MINUS, PARSER_MULTIPLY, PARSER_DIVIDE, PARSER_PERCENT, PARSER_POWER,
-          PARSER_SIN, PARSER_COS, PARSER_TG, PARSER_CTG,PARSER_EXP, PARSER_LG, PARSER_LN, PARSER_SQRT,
-          PARSER_X, PARSER_L_BRACKET, PARSER_R_BRACKET,PARSER_PI, PARSER_NUMBER, PARSER_END } typToken;
-   int pos;
-
-   const double *x;
-   double result;
-
-   vector<TParserNode *> history;
-
-  private:
-   TParserNode *CreateNode(double _value=0.0, TParserNode *_left=NULL, TParserNode *_right=NULL);
-
-   TParserNode *Expr(void);
-   TParserNode *Expr1(void);
-   TParserNode *Expr2(void);
-   TParserNode *Expr3(void);
-   TParserNode *Expr4(void);
-   TParserNode *Expr5(void);
-
-   bool GetToken(void);
-   bool IsDelim(void) { return (strchr("+-*/%^()", expr[pos])!=NULL); }
-   bool IsLetter(void) { return ((expr[pos]>='a' && expr[pos]<='z') ||
-                                 (expr[pos]>='A' && expr[pos]<='Z')); }
-   bool IsDigit(void) { return (expr[pos]>='0' && expr[pos]<='9'); }
-   bool IsPoint(void) { return (expr[pos]=='.'); }
-
-   double CalcTree(TParserNode *tree);
-   void  DelTree(TParserNode *tree);
-
-   void SendError(int errNum);
-
-  public:
-   TParser() { result = 0.0; x = NULL; root = NULL; }
-   ~TParser() { DelTree(root); root=NULL; }
-   void SetX(const double *_x) { x=_x; }
-
-   bool Compile(char *expr);
-   void Decompile() { DelTree(root); root=NULL; }
-
-   double Evaluate();
-   double Evaluate(double *_x) { SetX(_x); return Evaluate(); }
-   double Evaluate(double x, ...) { SetX(&x); return Evaluate(); }
-
-   double GetResult(void) { return result; }
-
-
-   enum trigonometryMode {
-       Radians = 1,
-       Degrees = 2
-   };
-
-   void setTrigonometryMode(trigonometryMode setMode);
-
-  private:
-   trigonometryMode mode = Radians;
-};
-
-#endif
+#endif // _REPLACEDIALOG_H_
 </code></pre>
-<h2 id="2-具体实现函数"><a href="#2-具体实现函数" class="headerlink" title="2.具体实现函数"></a>2.具体实现函数</h2><h3 id="mainwindow-cpp"><a href="#mainwindow-cpp" class="headerlink" title="mainwindow.cpp"></a>mainwindow.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "mainwindow.h"
-#include "ui_mainwindow.h"
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="myword-cpp"><a href="#myword-cpp" class="headerlink" title="myword.cpp"></a>myword.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "myword.h"
+#include <QtWidgets>
+#include "mychild.h"
+#include "FindDialog.h"
+#include <QEvent>
+#include <QTextCursor>
+#include <QMessageBox>
+#include <QTextCursor>
 
-MainWindow::MainWindow(QWidget *parent)
+const QString rsrcPath = ":/images";
+MyWord::MyWord(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    ui->textEdit_history->setVisible(false);
-    ui->pushButton_clear_history->setVisible(false);
+    mdiArea = new QMdiArea;
+    mdiArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    mdiArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    setCentralWidget(mdiArea);
+    connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow*)),this, SLOT(updateMenus()));
+    windowMapper = new QSignalMapper(this);
+    connect(windowMapper, SIGNAL(mapped(QWidget*)),this, SLOT(setActiveSubWindow(QWidget*)));
+
+    createActions();
+    createMenus();
+    createToolBars();
+    createStatusBar();
+    updateMenus();
+
+    move(200,150);
+    resize(800,500);
+
+    setWindowTitle(tr("Word by hhb"));
+    setUnifiedTitleAndToolBarOnMac(true);
 }
 
-MainWindow::~MainWindow()
+MyWord::~MyWord()
 {
-    delete ui;
+
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *key)
+void MyWord::closeEvent(QCloseEvent *event)
 {
-    int keyCode;
-    keyCode=key->key();
-    switch (keyCode)
-    {
-    case Qt::Key_0:
-        on_pushButton_0_clicked();
-        break;
-    case Qt::Key_1:
-        on_pushButton_1_clicked();
-        break;
-    case Qt::Key_2:
-        on_pushButton_2_clicked();
-        break;
-    case Qt::Key_3:
-        on_pushButton_3_clicked();
-        break;
-    case Qt::Key_4:
-        on_pushButton_4_clicked();
-        break;
-    case Qt::Key_5:
-        on_pushButton_5_clicked();
-        break;
-    case Qt::Key_6:
-        on_pushButton_6_clicked();
-        break;
-    case Qt::Key_7:
-        on_pushButton_7_clicked();
-        break;
-    case Qt::Key_8:
-        on_pushButton_8_clicked();
-        break;
-    case Qt::Key_9:
-        on_pushButton_9_clicked();
-        break;
-    case Qt::Key_Backspace:
-        on_pushButton_backspace_clicked();
-        break;
-    case Qt::Key_Period:
-        on_pushButton_dot_clicked();
-        break;
-    case Qt::Key_Plus:
-        on_pushButton_add_clicked();
-        break;
-    case Qt::Key_Minus:
-        on_pushButton_sub_clicked();
-        break;
-    case Qt::Key_Enter:
-        on_pushButton_equally_clicked();
-        break;
-    case Qt::Key_Equal:
-        on_pushButton_equally_clicked();
-        break;
-    case Qt::Key_ParenLeft:
-        on_pushButton_bracket_left_clicked();
-        break;
-    case Qt::Key_ParenRight:
-        on_pushButton_bracket_right_clicked();
-        break;
-    case Qt::Key_AsciiCircum:
-        on_pushButton_caret_clicked();
-        break;
-    case Qt::Key_Slash:
-        on_pushButton_div_clicked();
-        break;
-    case Qt::Key_multiply:
-        on_pushButton_mul_clicked();
-        break;
+    mdiArea->closeAllSubWindows();
+    if (mdiArea->currentSubWindow()) {
+        event->ignore();
+    } else {
+        event->accept();
     }
 }
 
-void MainWindow::addTextInLineEdit(QString text)
+void MyWord::updateMenus()
 {
-    if(ui->lineEdit_expression->text() == "" || ui->lineEdit_expression->text() == "0")
-        ui->lineEdit_expression->setText(text);
-    else
-        ui->lineEdit_expression->insert(text);
+    //至少有一个子文档打开着的情况
+    bool hasMyChild = (activeMyChild()!=0);
+
+    saveAct->setEnabled(hasMyChild);
+    saveAsAct->setEnabled(hasMyChild);
+    printAct->setEnabled(hasMyChild);
+    printPreviewAct->setEnabled(hasMyChild);
+
+    pasteAct->setEnabled(hasMyChild);
+
+    closeAct->setEnabled(hasMyChild);
+    closeAllAct->setEnabled(hasMyChild);
+    tileAct->setEnabled(hasMyChild);
+    cascadeAct->setEnabled(hasMyChild);
+    nextAct->setEnabled(hasMyChild);
+    previousAct->setEnabled(hasMyChild);
+    separatorAct->setVisible(hasMyChild);
+    //文档打开着并且其中有内容被选中的情况
+    bool hasSelection = (activeMyChild() && activeMyChild()->textCursor().hasSelection());
+
+    cutAct->setEnabled(hasSelection);
+    copyAct->setEnabled(hasSelection);
+
+    boldAct->setEnabled(hasSelection);
+    italicAct->setEnabled(hasSelection);
+    underlineAct->setEnabled(hasSelection);
+    leftAlignAct->setEnabled(hasSelection);
+    centerAct->setEnabled(hasSelection);
+    rightAlignAct->setEnabled(hasSelection);
+    justifyAct->setEnabled(hasSelection);
+    colorAct->setEnabled(hasSelection);
 }
 
-void MainWindow::simpleAction(QString begin, QString end)
+void MyWord::updateWindowMenu()
 {
-    expression=begin+ui->lineEdit_expression->text()+end;
-    on_pushButton_equally_clicked();
-}
+    windowMenu->clear();
+    windowMenu->addAction(closeAct);
+    windowMenu->addAction(closeAllAct);
+    windowMenu->addSeparator();
+    windowMenu->addAction(tileAct);
+    windowMenu->addAction(cascadeAct);
+    windowMenu->addSeparator();
+    windowMenu->addAction(nextAct);
+    windowMenu->addAction(previousAct);
+    windowMenu->addAction(separatorAct);
 
-void MainWindow::on_pushButton_history_clicked()
-{
-    ui->textEdit_history->setVisible(!ui->textEdit_history->isVisible());
-    ui->pushButton_clear_history->setVisible(!ui->pushButton_clear_history->isVisible());
-}
+    QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
+    separatorAct->setVisible(!windows.isEmpty());
+    //显示当前打开着的文档子窗口项
+    for (int i = 0; i < windows.size(); ++i) {
+        MyChild *child = qobject_cast<MyChild *>(windows.at(i)->widget());
 
-void MainWindow::on_pushButton_c_clicked()
-{
-    ui->lineEdit_expression->setText("0");
-}
-
-void MainWindow::on_pushButton_0_clicked()
-{
-    addTextInLineEdit("0");
-}
-
-void MainWindow::on_pushButton_1_clicked()
-{
-    addTextInLineEdit("1");
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    addTextInLineEdit("2");
-}
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    addTextInLineEdit("3");
-}
-
-void MainWindow::on_pushButton_4_clicked()
-{
-    addTextInLineEdit("4");
-}
-
-void MainWindow::on_pushButton_5_clicked()
-{
-    addTextInLineEdit("5");
-}
-
-void MainWindow::on_pushButton_6_clicked()
-{
-    addTextInLineEdit("6");
-}
-
-void MainWindow::on_pushButton_7_clicked()
-{
-    addTextInLineEdit("7");
-}
-
-void MainWindow::on_pushButton_8_clicked()
-{
-    addTextInLineEdit("8");
-}
-
-void MainWindow::on_pushButton_9_clicked()
-{
-    addTextInLineEdit("9");
-}
-
-void MainWindow::on_pushButton_dot_clicked()
-{
-    ui->lineEdit_expression->insert(".");
-}
-
-void MainWindow::on_pushButton_add_clicked()
-{
-    ui->lineEdit_expression->insert("+");
-}
-
-void MainWindow::on_pushButton_sub_clicked()
-{
-    ui->lineEdit_expression->insert("-");
-}
-
-void MainWindow::on_pushButton_mul_clicked()
-{
-    ui->lineEdit_expression->insert("*");
-}
-
-void MainWindow::on_pushButton_div_clicked()
-{
-    ui->lineEdit_expression->insert("/");
-}
-
-void MainWindow::on_pushButton_mod_clicked()
-{
-    ui->lineEdit_expression->insert("%");
-}
-
-void MainWindow::on_pushButton_backspace_clicked()
-{
-    if(ui->lineEdit_expression->text()!="0")
-    {
-        int position = ui->lineEdit_expression->cursorPosition();
-        QString temp;
-        temp=ui->lineEdit_expression->text();
-        temp.remove(ui->lineEdit_expression->cursorPosition()-1,1);
-        if(temp!="")
-        {
-            ui->lineEdit_expression->setText(temp);
-            ui->lineEdit_expression->setCursorPosition(position-1);
+        QString text;
+        if (i < 9) {
+            text = tr("&%1 %2").arg(i + 1).arg(child->userFriendlyCurrentFile());
+        } else {
+            text = tr("%1 %2").arg(i + 1).arg(child->userFriendlyCurrentFile());
         }
-        else
-            ui->lineEdit_expression->setText("0");
+        QAction *action  = windowMenu->addAction(text);
+        action->setCheckable(true);
+        action ->setChecked(child == activeMyChild());
+        connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
+        windowMapper->setMapping(action, windows.at(i));
+    }
+    enabledText();          //使得字体设置菜单可用
+}
+
+MyChild *MyWord::createMyChild()
+{
+    MyChild *child = new MyChild;
+    mdiArea->addSubWindow(child);
+
+    connect(child, SIGNAL(copyAvailable(bool)),cutAct, SLOT(setEnabled(bool)));
+    connect(child, SIGNAL(copyAvailable(bool)),copyAct, SLOT(setEnabled(bool)));
+
+    return child;
+}
+
+void MyWord::createActions()
+{
+    /*【文件】菜单动作集*/
+    newAct = new QAction(QIcon(rsrcPath + "/filenew.png"), tr("新建"), this);
+    newAct->setShortcuts(QKeySequence::New);
+    newAct->setToolTip("新建");                   //设置工具栏按钮的提示文本
+    newAct->setStatusTip(tr("新建一个文件"));     //设置状态栏提示文本
+    connect(newAct, SIGNAL(triggered()), this, SLOT(fileNew()));
+
+    openAct = new QAction(QIcon(rsrcPath + "/fileopen.png"), tr("打开"), this);
+    openAct->setShortcuts(QKeySequence::Open);
+    openAct->setToolTip("打开");
+    openAct->setStatusTip(tr("打开已有文件"));
+    connect(openAct, SIGNAL(triggered()), this, SLOT(fileOpen()));
+
+    saveAct = new QAction(QIcon(rsrcPath + "/filesave.png"), tr("保存"), this);
+    saveAct->setShortcuts(QKeySequence::Save);
+    saveAct->setToolTip("保存");
+    saveAct->setStatusTip(tr("保存此文件"));
+    connect(saveAct, SIGNAL(triggered()), this, SLOT(fileSave()));
+
+    saveAsAct = new QAction(tr("另存为"), this);
+    saveAsAct->setShortcuts(QKeySequence::SaveAs);
+    saveAsAct->setStatusTip(tr("另存为"));
+    connect(saveAsAct, SIGNAL(triggered()), this, SLOT(fileSaveAs()));
+
+    printAct = new QAction(QIcon(rsrcPath + "/fileprint.png"), tr("打印"), this);
+    printAct->setShortcuts(QKeySequence::Print);
+    printAct->setToolTip("打印");
+    printAct->setStatusTip(tr("打印此文件"));
+    connect(printAct, SIGNAL(triggered()), this, SLOT(filePrint()));
+
+    printPreviewAct = new QAction(tr("打印预览"), this);
+    printPreviewAct->setStatusTip(tr("打印预览"));
+    connect(printPreviewAct, SIGNAL(triggered()), this, SLOT(filePrintPreview()));
+
+    exitAct = new QAction(tr("退出"), this);
+    exitAct->setShortcuts(QKeySequence::Quit);
+    exitAct->setStatusTip(tr("退出"));
+    connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
+
+    /*【编辑】菜单动作集*/
+    undoAct = new QAction(QIcon(rsrcPath + "/editundo.png"),tr("后退"), this);
+    undoAct->setShortcut(QKeySequence::Undo);
+    undoAct->setToolTip("后退");
+    undoAct->setStatusTip(tr("撤销刚刚的操作"));
+    connect(undoAct, SIGNAL(triggered()), this, SLOT(undo()));
+
+    redoAct = new QAction(QIcon(rsrcPath + "/editredo.png"),tr("前进"), this);
+    redoAct->setShortcut(QKeySequence::Redo);
+    redoAct->setToolTip("前进");
+    redoAct->setStatusTip(tr("重复之前的操作"));
+    connect(redoAct, SIGNAL(triggered()), this, SLOT(redo()));
+
+    cutAct = new QAction(QIcon(rsrcPath + "/editcut.png"),tr("剪贴"), this);
+    cutAct->setShortcuts(QKeySequence::Cut);
+    cutAct->setToolTip("剪贴");
+    cutAct->setStatusTip(tr("将选中内容放到剪贴板"));
+    connect(cutAct, SIGNAL(triggered()), this, SLOT(cut()));
+
+    copyAct = new QAction(QIcon(rsrcPath + "/editcopy.png"),tr("复制"), this);
+    copyAct->setShortcuts(QKeySequence::Copy);
+    copyAct->setToolTip("复制");
+    copyAct->setStatusTip(tr("将选中内容复制到剪贴板"));
+    connect(copyAct, SIGNAL(triggered()), this, SLOT(copy()));
+
+    pasteAct = new QAction(QIcon(rsrcPath + "/editpaste.png"),tr("粘贴"), this);
+    pasteAct->setShortcuts(QKeySequence::Paste);
+    pasteAct->setToolTip("粘贴");
+    pasteAct->setStatusTip(tr("粘贴剪贴板中的内容"));
+    connect(pasteAct, SIGNAL(triggered()), this, SLOT(paste()));
+
+    CountAct =new QAction(tr("统计"),this);
+    CountAct->setStatusTip(tr("统计文件中的字符数量"));
+    connect(CountAct,SIGNAL(triggered()),this,SLOT(count()));
+
+    CountT =new QAction(tr("特定统计"),this);
+    CountT->setStatusTip(tr("统计特定字符"));
+    connect(CountT,SIGNAL(triggered()),this,SLOT(countt()));
+
+    FindAct =new QAction(tr("查找"),this);
+    FindAct->setStatusTip(tr("查找文件中字符"));
+    connect(FindAct,SIGNAL(triggered()),this,SLOT(find()));
+
+    ReplaceAct = new QAction(QIcon(rsrcPath + "/find.png"),tr("替换"), this);
+    ReplaceAct->setStatusTip(tr("替换文件中字符"));
+    connect(ReplaceAct,SIGNAL(triggered()),this,SLOT(replace()));
+
+    /*【格式】菜单动作集*/
+    boldAct = new QAction(QIcon(rsrcPath + "/textbold.png"),tr("加粗"), this);
+    boldAct->setCheckable(true);
+    boldAct->setShortcut(Qt::CTRL + Qt::Key_B);
+    boldAct->setToolTip("加粗");
+    boldAct->setStatusTip(tr("加粗选中的字体"));
+    QFont bold;
+    bold.setBold(true);
+    boldAct->setFont(bold);
+    connect(boldAct, SIGNAL(triggered()), this, SLOT(textBold()));
+
+    italicAct = new QAction(QIcon(rsrcPath + "/textitalic.png"),tr("斜体"), this);
+    italicAct->setCheckable(true);
+    italicAct->setShortcut(Qt::CTRL + Qt::Key_I);
+    italicAct->setToolTip("斜体");
+    italicAct->setStatusTip(tr("使选中字体倾斜"));
+    QFont italic;
+    italic.setItalic(true);
+    italicAct->setFont(italic);
+    connect(italicAct, SIGNAL(triggered()), this, SLOT(textItalic()));
+
+    underlineAct = new QAction(QIcon(rsrcPath + "/textunder.png"),tr("下划线"), this);
+    underlineAct->setCheckable(true);
+    underlineAct->setShortcut(Qt::CTRL + Qt::Key_U);
+    underlineAct->setToolTip("下划线");
+    underlineAct->setStatusTip(tr("为所选字体添加下划线"));
+    QFont underline;
+    underline.setUnderline(true);
+    underlineAct->setFont(underline);
+    connect(underlineAct, SIGNAL(triggered()), this, SLOT(textUnderline()));
+
+    //【格式】→【段落】子菜单下的各项为同一个菜单项组，只能选中其中一项
+    QActionGroup *grp = new QActionGroup(this);
+    connect(grp, SIGNAL(triggered(QAction*)), this, SLOT(textAlign(QAction*)));
+
+    if (QApplication::isLeftToRight()) {
+        leftAlignAct = new QAction(QIcon(rsrcPath + "/textleft.png"),tr("左对齐"), grp);
+        centerAct = new QAction(QIcon(rsrcPath + "/textcenter.png"),tr("居中"), grp);
+        rightAlignAct = new QAction(QIcon(rsrcPath + "/textright.png"),tr("右对齐"), grp);
+    } else {
+        rightAlignAct = new QAction(QIcon(rsrcPath + "/textright.png"),tr("右对齐"), grp);
+        centerAct = new QAction(QIcon(rsrcPath + "/textcenter.png"),tr("居中"), grp);
+        leftAlignAct = new QAction(QIcon(rsrcPath + "/textleft.png"),tr("左对齐"), grp);
+    }
+    justifyAct = new QAction(QIcon(rsrcPath + "/textjustify.png"),tr("两端对齐"), grp);
+
+    leftAlignAct->setShortcut(Qt::CTRL + Qt::Key_L);
+    leftAlignAct->setCheckable(true);
+    leftAlignAct->setToolTip("左对齐");
+    leftAlignAct->setStatusTip(tr("左对齐文档"));
+
+    centerAct->setShortcut(Qt::CTRL + Qt::Key_E);
+    centerAct->setCheckable(true);
+    centerAct->setToolTip("居中");
+    centerAct->setStatusTip(tr("居中显示"));
+
+    rightAlignAct->setShortcut(Qt::CTRL + Qt::Key_R);
+    rightAlignAct->setCheckable(true);
+    rightAlignAct->setToolTip("右对齐");
+    rightAlignAct->setStatusTip(tr("右对齐文档"));
+
+    justifyAct->setShortcut(Qt::CTRL + Qt::Key_J);
+    justifyAct->setCheckable(true);
+    justifyAct->setToolTip("两端对齐");
+    justifyAct->setStatusTip(tr("两端对齐"));
+
+    QPixmap pix(16, 16);
+    pix.fill(Qt::red);
+    colorAct = new QAction(pix, tr("颜色"), this);
+    colorAct->setToolTip("颜色");
+    colorAct->setStatusTip(tr("为所选文本添加颜色"));
+    connect(colorAct, SIGNAL(triggered()), this, SLOT(textColor()));
+
+    /*【窗口】菜单动作集*/
+    closeAct = new QAction(tr("关闭"), this);
+    closeAct->setStatusTip(tr("关闭当前窗口"));
+    connect(closeAct, SIGNAL(triggered()),mdiArea, SLOT(closeActiveSubWindow()));
+
+    closeAllAct = new QAction(tr("关闭所有"), this);
+    closeAllAct->setStatusTip(tr("关闭所有窗口"));
+    connect(closeAllAct, SIGNAL(triggered()),mdiArea, SLOT(closeAllSubWindows()));
+
+    tileAct = new QAction(tr("平铺"), this);
+    tileAct->setStatusTip(tr("平铺窗口"));
+    connect(tileAct, SIGNAL(triggered()), mdiArea, SLOT(tileSubWindows()));
+
+    cascadeAct = new QAction(tr("层叠"), this);
+    cascadeAct->setStatusTip(tr("层叠窗口"));
+    connect(cascadeAct, SIGNAL(triggered()), mdiArea, SLOT(cascadeSubWindows()));
+
+    nextAct = new QAction(tr("下一个"), this);
+    nextAct->setShortcuts(QKeySequence::NextChild);
+    nextAct->setStatusTip(tr("下一个窗口"));
+    connect(nextAct, SIGNAL(triggered()),mdiArea, SLOT(activateNextSubWindow()));
+
+    previousAct = new QAction(tr("上一个"), this);
+    previousAct->setShortcuts(QKeySequence::PreviousChild);
+    previousAct->setStatusTip(tr("上一个窗口"));
+    connect(previousAct, SIGNAL(triggered()),mdiArea, SLOT(activatePreviousSubWindow()));
+
+    separatorAct = new QAction(this);
+    separatorAct->setSeparator(true);
+
+    /*【帮助】菜单动作集*/
+    aboutAct = new QAction(tr("关于"), this);
+    aboutAct->setStatusTip(tr("关于此程序"));
+    connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
+
+    aboutQtAct = new QAction(tr("关于QT"), this);
+    aboutQtAct->setStatusTip(tr("ABout Qt library"));
+    connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+
+}
+
+void MyWord::createMenus()
+{
+    //【文件】主菜单
+    fileMenu = menuBar()->addMenu(tr("文件"));
+    fileMenu->addAction(newAct);
+    fileMenu->addAction(openAct);
+    fileMenu->addSeparator();   //分隔线
+    fileMenu->addAction(saveAct);
+    fileMenu->addAction(saveAsAct);
+    fileMenu->addSeparator();   //分隔线
+    fileMenu->addAction(printAct);
+    fileMenu->addAction(printPreviewAct);
+    fileMenu->addSeparator();   //分隔线
+    fileMenu->addAction(exitAct);
+
+    //【编辑】主菜单
+    editMenu = menuBar()->addMenu(tr("编辑"));
+    editMenu->addAction(undoAct);
+    editMenu->addAction(redoAct);
+    editMenu->addSeparator();   //分隔线
+    editMenu->addAction(cutAct);
+    editMenu->addAction(copyAct);
+    editMenu->addAction(pasteAct);
+    editMenu->addSeparator();   //分隔线
+    editMenu->addAction(CountAct);
+    editMenu->addAction(CountT);
+    editMenu->addAction(FindAct);
+    editMenu->addAction(ReplaceAct);
+
+    //【格式】主菜单
+    formatMenu = menuBar()->addMenu(tr("格式"));
+    fontMenu = formatMenu->addMenu(tr("字体"));   //【字体】子菜单
+    fontMenu->addAction(boldAct);
+    fontMenu->addAction(italicAct);
+    fontMenu->addAction(underlineAct);
+    alignMenu = formatMenu->addMenu(tr("段落"));      //【段落】子菜单
+    alignMenu->addAction(leftAlignAct);
+    alignMenu->addAction(centerAct);
+    alignMenu->addAction(rightAlignAct);
+    alignMenu->addAction(justifyAct);
+
+    formatMenu->addAction(colorAct);
+
+    //【窗口】主菜单
+    windowMenu = menuBar()->addMenu(tr("窗口"));
+    updateWindowMenu();
+    connect(windowMenu, SIGNAL(aboutToShow()), this, SLOT(updateWindowMenu()));
+    menuBar()->addSeparator();
+
+    //【帮助】主菜单
+    helpMenu = menuBar()->addMenu(tr("帮助"));
+    helpMenu->addAction(aboutAct);
+    helpMenu->addSeparator();   //分隔线
+    helpMenu->addAction(aboutQtAct);
+}
+
+void MyWord::createToolBars()
+{
+    //"文件"工具栏
+    fileToolBar = addToolBar(tr("文件"));
+    fileToolBar->addAction(newAct);
+    fileToolBar->addAction(openAct);
+    fileToolBar->addAction(saveAct);
+    fileToolBar->addSeparator();        //分隔条
+    fileToolBar->addAction(printAct);
+
+    //"编辑"工具栏
+    editToolBar = addToolBar(tr("编辑"));
+    editToolBar->addAction(undoAct);
+    editToolBar->addAction(redoAct);
+    editToolBar->addSeparator();        //分隔条
+    editToolBar->addAction(cutAct);
+    editToolBar->addAction(copyAct);
+    editToolBar->addAction(pasteAct);
+    editToolBar->addAction(ReplaceAct);
+
+    //"格式"工具栏
+    formatToolBar = addToolBar(tr("格式"));
+    formatToolBar->addAction(boldAct);
+    formatToolBar->addAction(italicAct);
+    formatToolBar->addAction(underlineAct);
+    formatToolBar->addSeparator();      //分隔条
+    formatToolBar->addAction(leftAlignAct);
+    formatToolBar->addAction(centerAct);
+    formatToolBar->addAction(rightAlignAct);
+    formatToolBar->addAction(justifyAct);
+    formatToolBar->addSeparator();      //分隔条
+    formatToolBar->addAction(colorAct);
+
+    //组合工具栏
+    addToolBarBreak(Qt::TopToolBarArea);    //使这个工具条在界面上另起一行显示
+    comboToolBar = addToolBar(tr("Symbol and Number"));
+    comboStyle = new QComboBox();
+    comboToolBar->addWidget(comboStyle);
+    comboStyle->addItem("Standard");
+    comboStyle->addItem("Item Symbol (.)");
+    comboStyle->addItem("Item Symbol (。)");
+    comboStyle->addItem("Item Symbol (■)");
+    comboStyle->addItem("Number (1.2.3.)");
+    comboStyle->addItem("Number ( a.b.c.)");
+    comboStyle->addItem("Number ( A.B.C.)");
+    comboStyle->addItem("Number (ⅰ.ⅱ.ⅲ.)");
+    comboStyle->addItem("Number (Ⅰ.Ⅱ.Ⅲ.)");
+    comboStyle->setStatusTip("添加符号或数字");
+    connect(comboStyle, SIGNAL(activated(int)), this, SLOT(textStyle(int)));
+
+    comboFont = new QFontComboBox();
+    comboToolBar->addWidget(comboFont);
+    comboFont->setStatusTip("更改字体");
+    connect(comboFont, SIGNAL(activated(QString)), this, SLOT(textFamily(QString)));
+
+    comboSize = new QComboBox();
+    comboToolBar->addWidget(comboSize);
+    comboSize->setEditable(true);
+    comboSize->setStatusTip("更改字体大小");
+
+    QFontDatabase db;
+    foreach(int size, db.standardSizes())
+        comboSize->addItem(QString::number(size));
+
+    connect(comboSize, SIGNAL(activated(QString)), this, SLOT(textSize(QString)));
+    comboSize->setCurrentIndex(comboSize->findText(QString::number(QApplication::font().pointSize())));
+}
+
+void MyWord::createStatusBar()
+{
+    statusBar()->showMessage(tr("就绪"));
+}
+
+MyChild *MyWord::activeMyChild()
+{
+    if (QMdiSubWindow *activeSubWindow = mdiArea->activeSubWindow())
+        return qobject_cast<MyChild *>(activeSubWindow->widget());
+    return 0;
+}
+
+//打开文件用
+QMdiSubWindow *MyWord::findMyChild(const QString &fileName)
+{
+    QString canonicalFilePath = QFileInfo(fileName).canonicalFilePath();
+
+    foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
+        MyChild *myChild = qobject_cast<MyChild *>(window->widget());
+        if (myChild->currentFile() == canonicalFilePath)
+            return window;
+    }
+    return 0;
+}
+void MyWord::setActiveSubWindow(QWidget *window)
+{
+    if (!window)
+        return;
+    mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(window));
+}
+
+void MyWord::fileNew()
+{
+    MyChild *child = createMyChild();
+    child->newFile();
+    child->show();
+    enabledText();              //使得字体设置菜单可用
+}
+
+void MyWord::fileOpen()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("打开"),QString(), tr("HTML 文档 (*.htm *.html);;所有文件 (*.*)"));
+    if (!fileName.isEmpty()) {
+        QMdiSubWindow *existing = findMyChild(fileName);
+        if (existing) {
+            mdiArea->setActiveSubWindow(existing);
+            return;
+        }
+        MyChild *child = createMyChild();
+        if (child->loadFile(fileName)) {
+            statusBar()->showMessage(tr("文件加载中"), 2000);
+            child->show();
+            enabledText();      //使得字体设置菜单可用
+        } else {
+            child->close();
+        }
     }
 }
 
-void MainWindow::on_pushButton_equally_clicked()
+void MyWord::fileSave()
 {
-    try {
-        TParser::trigonometryMode mode;
-        if(ui->radioButton_radians->isChecked()) mode = TParser::Radians;
-        else mode = TParser::Degrees;
-        calc.setMode(mode);
-        if(ui->actionAdvanced->isChecked())
-            calc.setExpression(ui->lineEdit_expression->text());
-        else
+    if (activeMyChild() && activeMyChild()->save())
+        statusBar()->showMessage(tr("保存成功"), 2000);
+}
+
+void MyWord::fileSaveAs()
+{
+    if (activeMyChild() && activeMyChild()->saveAs())
+        statusBar()->showMessage(tr("保存成功"), 2000);
+}
+
+void MyWord::undo()
+{
+    if(activeMyChild())
+        activeMyChild()->undo();
+}
+
+void MyWord::redo()
+{
+    if(activeMyChild())
+        activeMyChild()->redo();
+}
+
+void MyWord::cut()
+{
+    if (activeMyChild())
+        activeMyChild()->cut();
+}
+
+void MyWord::copy()
+{
+    if (activeMyChild())
+        activeMyChild()->copy();
+}
+
+void MyWord::paste()
+{
+    if (activeMyChild())
+        activeMyChild()->paste();
+}
+
+void MyWord::enabledText()
+{
+    boldAct->setEnabled(true);
+    italicAct->setEnabled(true);
+    underlineAct->setEnabled(true);
+    leftAlignAct->setEnabled(true);
+    centerAct->setEnabled(true);
+    rightAlignAct->setEnabled(true);
+    justifyAct->setEnabled(true);
+    colorAct->setEnabled(true);
+}
+
+void MyWord::textBold()
+{
+    QTextCharFormat fmt;
+    fmt.setFontWeight(boldAct->isChecked() ? QFont::Bold : QFont::Normal);
+    if(activeMyChild())
+        activeMyChild()->mergeFormatOnWordOrSelection(fmt);
+}
+
+void MyWord::textItalic()
+{
+    QTextCharFormat fmt;
+    fmt.setFontItalic(italicAct->isChecked());
+    if(activeMyChild())
+        activeMyChild()->mergeFormatOnWordOrSelection(fmt);
+}
+
+void MyWord::textUnderline()
+{
+    QTextCharFormat fmt;
+    fmt.setFontUnderline(underlineAct->isChecked());
+    if(activeMyChild())
+        activeMyChild()->mergeFormatOnWordOrSelection(fmt);
+}
+
+void MyWord::textAlign(QAction *a)
+{
+    if(activeMyChild())
+    {
+        if (a == leftAlignAct)
+            activeMyChild()->setAlign(1);
+        else if (a == centerAct)
+            activeMyChild()->setAlign(2);
+        else if (a == rightAlignAct)
+            activeMyChild()->setAlign(3);
+        else if (a == justifyAct)
+            activeMyChild()->setAlign(4);
+    }
+}
+
+void MyWord::textStyle(int styleIndex)
+{
+    if(activeMyChild())
+    {
+        activeMyChild()->setStyle(styleIndex);
+    }
+}
+
+void MyWord::textFamily(const QString &f)
+{
+    QTextCharFormat fmt;
+    fmt.setFontFamily(f);
+    if(activeMyChild())
+        activeMyChild()->mergeFormatOnWordOrSelection(fmt);
+}
+
+void MyWord::textSize(const QString &p)
+{
+    qreal pointSize = p.toFloat();
+    if (p.toFloat() > 0) {
+        QTextCharFormat fmt;
+        fmt.setFontPointSize(pointSize);
+        if(activeMyChild())
+            activeMyChild()->mergeFormatOnWordOrSelection(fmt);
+    }
+}
+
+void MyWord::textColor()
+{
+    if(activeMyChild())
+    {
+        QColor col = QColorDialog::getColor(activeMyChild()->textColor(), this);
+        if (!col.isValid())
+            return;
+        QTextCharFormat fmt;
+        fmt.setForeground(col);
+        activeMyChild()->mergeFormatOnWordOrSelection(fmt);
+        colorChanged(col);
+    }
+}
+
+void MyWord::fontChanged(const QFont &f)
+{
+    comboFont->setCurrentIndex(comboFont->findText(QFontInfo(f).family()));
+    comboSize->setCurrentIndex(comboSize->findText(QString::number(f.pointSize())));
+    boldAct->setChecked(f.bold());
+    italicAct->setChecked(f.italic());
+    underlineAct->setChecked(f.underline());
+}
+
+void MyWord::colorChanged(const QColor &c)
+{
+    QPixmap pix(16, 16);
+    pix.fill(c);
+    colorAct->setIcon(pix);
+}
+
+void MyWord::alignmentChanged(Qt::Alignment a)
+{
+    if (a & Qt::AlignLeft)
+        leftAlignAct->setChecked(true);
+    else if (a & Qt::AlignHCenter)
+        centerAct->setChecked(true);
+    else if (a & Qt::AlignRight)
+        rightAlignAct->setChecked(true);
+    else if (a & Qt::AlignJustify)
+        justifyAct->setChecked(true);
+}
+
+void MyWord::filePrint()
+{
+    QPrinter printer(QPrinter::HighResolution);
+    QPrintDialog *dlg = new QPrintDialog(&printer, this);
+    if (activeMyChild()->textCursor().hasSelection())
+        dlg->addEnabledOption(QAbstractPrintDialog::PrintSelection);
+    dlg->setWindowTitle(tr("打印文件"));
+    if (dlg->exec() == QDialog::Accepted)
+        activeMyChild()->print(&printer);
+    delete dlg;
+}
+
+void MyWord::filePrintPreview()
+{
+    QPrinter printer(QPrinter::HighResolution);
+    QPrintPreviewDialog preview(&printer, this);
+    connect(&preview, SIGNAL(paintRequested(QPrinter*)), SLOT(printPreview(QPrinter*)));
+    preview.exec();
+}
+
+void MyWord::printPreview(QPrinter *printer)
+{
+    activeMyChild()->print(printer);
+}
+
+void MyWord::about()
+{
+    QMessageBox::about(this, tr("关于此程序"), tr("程序设计综合实践课程\n学号：17195476\n姓名：胡航博"));
+}
+
+void MyWord::count()
+{
+    int L = 0;//大写字母个数
+    int l=0; //小写字母
+    int N = 0;//数字个数
+    int O = 0;//其他字符
+    int sp = 0;//空格字数
+    int C = 0;//汉字字数
+    QString str;
+    if(activeMyChild())
+    {
+        str=activeMyChild()->toPlainText();
+        int len = str.length();
+        for(int i = 0; i < len; ++i)
         {
-            if(expression.isEmpty()) expression = ui->lineEdit_expression->text();
-            calc.setExpression(expression);
-        }
-        calc.calculate();
-        ui->label_Result->setText(calc.getResult());
-        if(ui->actionAdvanced->isChecked())
-            ui->textEdit_history->append(ui->lineEdit_expression->text() + "=" + calc.getResult());
-        else
+            QChar t = str.at(i);
+            ushort uni = t.unicode();
+            if(uni >= 0x4E00 && uni <= 0x9FA5)
+                C++; //中文
+            else if (uni >= 0x0030 && uni <= 0x0039)
+                N++; //数字
+            else if (uni >= 97 && uni <= 122)
+                l++; //小写字母
+            else if (uni >= 65 && uni <= 90)
+                L++;  //大写字母
+            else if (uni ==32)
+                sp++;  //空格
+            else
+                O++;  //其他字符
+         }
+        //message对话框
+        QString mesg=tr(" 大写字母:  %1\n 小写字母:  %2\n 数字:     %3\n 汉字:     %4 \n 空格:     %5 \n 其他字符:  %6 \n 总字符数:  %7 \n ").arg(L).arg(l).arg(N).arg(C).arg(sp).arg(O).arg(len);    // m = "12:60:60:;
+        QMessageBox::about(NULL, "统计", mesg);
+    }
+}
+
+void MyWord::countt()
+{
+    QString strfile;
+    if(activeMyChild())
+    {
+        strfile=activeMyChild()->toPlainText();
+        //将文件从String转换为char*
+        std::string str = strfile.toStdString();
+        const char* filetext = str.c_str();
+
+        bool ok;
+        QString text=QInputDialog::getText(this,tr("统计特定字符串"),tr("请输入"),QLineEdit::Normal,nullptr,&ok);
+        //将输入从String转换为char*
+        std::string str2 = text.toStdString();
+        const char* inputtext = str2.c_str();
+
+        if(ok && !text.isEmpty())
         {
-            ui->textEdit_history->append(expression + "=" + calc.getResult());
-            expression.clear();
+            int number = Num0fstr(filetext,inputtext);
+            //message对话框
+            QString mesg2=tr(" 特定串的数量为 %1\n ").arg(number);
+            QMessageBox::about(NULL, "特定统计", mesg2);
         }
-    } catch (calculator::err er) {
-        switch (er) {
+    }
+
+}
+void MyWord::find()
+{
+
+    new_FindDialog= new FindDialog;
+    new_FindDialog->setPlainTextEdit((QPlainTextEdit*)activeMyChild());
+    new_FindDialog->show();
+
+}
+
+
+void MyWord::replace()
+{
+    new_ReplaceDialog= new ReplaceDialog;
+    new_ReplaceDialog->setPlainTextEdit((QPlainTextEdit*)activeMyChild());
+    new_ReplaceDialog->show();
+}
+
+
+int MyWord::Num0fstr(const char *Mstr, const char *substr)
+{
+    int number = 0;
+        const char *p;//字符串辅助指针
+        const char *q;//字符串辅助指针
+        while(*Mstr != '\0')
+        {
+            p = Mstr;
+            q = substr;
+
+            while((*p == *q)&&(*p!='\0')&&(*q!='\0'))
+            { //相等且未到字符串结尾
+                p++;
+                q++;
+            }
+            if(*q=='\0')
+            {
+                number++; //计数加一
+            }
+            Mstr++;
+        }
+        return number;
+}
+</code></pre>
+<h3 id="mychild-cpp"><a href="#mychild-cpp" class="headerlink" title="mychild.cpp"></a>mychild.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "mychild.h"
+#include <QtWidgets>
+MyChild::MyChild()
+{
+    setAttribute(Qt::WA_DeleteOnClose);
+    isUntitled = true;
+}
+
+void MyChild::newFile()
+{
+    static int sequenceNumber = 1;
+
+    isUntitled = true;
+    curFile = tr("文件 %1").arg(sequenceNumber++);
+    setWindowTitle(curFile);
+}
+
+bool MyChild::loadFile(const QString &fileName)
+{
+    if (!fileName.isEmpty())
+    {
+        if (!QFile::exists(fileName))
+            return false;
+        QFile file(fileName);
+        if (!file.open(QFile::ReadOnly))
+            return false;
+
+        QByteArray data = file.readAll();
+        QTextCodec *codec = Qt::codecForHtml(data);
+        QString str = codec->toUnicode(data);
+        if (Qt::mightBeRichText(str)) {
+            this->setHtml(str);
+        } else {
+            str = QString::fromLocal8Bit(data);
+            this->setPlainText(str);
+        }
+        setCurrentFile(fileName);
+        connect(document(), SIGNAL(contentsChanged()),this, SLOT(documentWasModified()));
+        return true;
+    }
+}
+
+void MyChild::documentWasModified()
+{
+    setWindowModified(document()->isModified());
+}
+
+QString MyChild::strippedName(const QString &fullFileName)
+{
+    return QFileInfo(fullFileName).fileName();
+}
+
+QString MyChild::userFriendlyCurrentFile()
+{
+    return strippedName(curFile);
+}
+
+void MyChild::setCurrentFile(const QString &fileName)
+{
+    curFile = QFileInfo(fileName).canonicalFilePath();
+    isUntitled = false;
+    document()->setModified(false);
+    setWindowModified(false);
+    setWindowTitle(userFriendlyCurrentFile() + "[*]");
+}
+
+void MyChild::closeEvent(QCloseEvent *event)
+{
+    if (maybeSave()) {
+        event->accept();
+    } else {
+        event->ignore();
+    }
+}
+
+bool MyChild::maybeSave()
+{
+    if (!document()->isModified())
+        return true;
+    QMessageBox::StandardButton ret;
+    ret = QMessageBox::warning(this, tr("My Word"),tr("'%1'已经被改变,你想要保存吗?").arg(userFriendlyCurrentFile()),QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    if (ret == QMessageBox::Save)
+        return save();
+    else if (ret == QMessageBox::Cancel)
+        return false;
+    return true;
+}
+
+bool MyChild::save()
+{
+    if (isUntitled) {
+        return saveAs();
+    } else {
+        return saveFile(curFile);
+    }
+}
+
+bool MyChild::saveAs()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),curFile,tr("HTML file (*.htm *.html);;All files  (*.*)"));
+    if (fileName.isEmpty())
+        return false;
+
+    return saveFile(fileName);
+}
+
+bool MyChild::saveFile(QString fileName)
+{
+    if (!(fileName.endsWith(".htm", Qt::CaseInsensitive) || fileName.endsWith(".html", Qt::CaseInsensitive))) {
+        fileName += ".html"; // 默认保存为 HTML 文档
+    }
+    QTextDocumentWriter writer(fileName);
+    bool success = writer.write(this->document());
+    if (success)
+        setCurrentFile(fileName);
+    return success;
+}
+
+//格式设置
+void MyChild::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
+{
+    QTextCursor cursor = this->textCursor();
+    if (!cursor.hasSelection())
+        cursor.select(QTextCursor::WordUnderCursor);
+    cursor.mergeCharFormat(format);
+    this->mergeCurrentCharFormat(format);
+}
+
+//段落对齐设置
+void MyChild::setAlign(int align)
+{
+    if (align == 1)
+        this->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
+    else if (align == 2)
+        this->setAlignment(Qt::AlignHCenter);
+    else if (align == 3)
+        this->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
+    else if (align == 4)
+        this->setAlignment(Qt::AlignJustify);
+}
+
+//段落标号、编号
+void MyChild::setStyle(int style)
+{
+    QTextCursor cursor = this->textCursor();
+
+    if (style != 0) {
+        QTextListFormat::Style stylename = QTextListFormat::ListDisc;
+
+        switch (style) {
+            default:
             case 1:
-                ui->label_Result->setText("Empty expression");
+                stylename = QTextListFormat::ListDisc;
                 break;
             case 2:
-                ui->label_Result->setText("Div by zero");
+                stylename = QTextListFormat::ListCircle;
                 break;
             case 3:
-                ui->label_Result->setText("Expression contains equal sign");
+                stylename = QTextListFormat::ListSquare;
                 break;
             case 4:
-                ui->label_Result->setText("Something went wrong");
+                stylename = QTextListFormat::ListDecimal;
                 break;
+            case 5:
+                stylename = QTextListFormat::ListLowerAlpha;
+                break;
+            case 6:
+                stylename = QTextListFormat::ListUpperAlpha;
+                break;
+            case 7:
+                stylename = QTextListFormat::ListLowerRoman;
+                break;
+            case 8:
+                stylename = QTextListFormat::ListUpperRoman;
+                break;
+        }
+
+        cursor.beginEditBlock();
+
+        QTextBlockFormat blockFmt = cursor.blockFormat();
+
+        QTextListFormat listFmt;
+
+        if (cursor.currentList()) {
+            listFmt = cursor.currentList()->format();
+        } else {
+            listFmt.setIndent(blockFmt.indent() + 1);
+            blockFmt.setIndent(0);
+            cursor.setBlockFormat(blockFmt);
+        }
+
+        listFmt.setStyle(stylename);
+
+        cursor.createList(listFmt);
+
+        cursor.endEditBlock();
+    } else {
+        QTextBlockFormat bfmt;
+        bfmt.setObjectIndex(-1);
+        cursor.mergeBlockFormat(bfmt);
+    }
+}
+</code></pre>
+<h3 id="FindDialog-cpp"><a href="#FindDialog-cpp" class="headerlink" title="FindDialog.cpp"></a>FindDialog.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "FindDialog.h"
+#include <QEvent>
+#include <QTextCursor>
+#include <QMessageBox>
+
+FindDialog::FindDialog(QWidget *parent, QPlainTextEdit* pText)
+    : QDialog(parent, Qt::WindowCloseButtonHint | Qt::Drawer)
+{
+    initControl();
+    connectSlot();
+    setLayout(&m_layout);
+    setWindowTitle("寻找");
+    setPlainTextEdit(pText);
+}
+
+void FindDialog::initControl()
+{
+    m_findLbl.setText("内容:");
+    m_findBtn.setText("寻找");
+    m_closeBtn.setText("关闭");
+    m_matchChkBx.setText("匹配大小写");
+    m_backwardBtn.setText("后退");
+    m_forwardBtn.setText("前进");
+    m_forwardBtn.setChecked(true);
+    m_radioGrpBx.setTitle("方向");
+
+    m_hbLayout.addWidget(&m_forwardBtn);
+    m_hbLayout.addWidget(&m_backwardBtn);
+
+    m_radioGrpBx.setLayout(&m_hbLayout);
+
+    m_layout.setSpacing(10);
+    m_layout.addWidget(&m_findLbl, 0, 0);
+    m_layout.addWidget(&m_findEdit, 0, 1);
+    m_layout.addWidget(&m_findBtn, 0, 2);
+    m_layout.addWidget(&m_matchChkBx, 1, 0);
+    m_layout.addWidget(&m_radioGrpBx, 1, 1);
+    m_layout.addWidget(&m_closeBtn, 1, 2);
+
+}
+
+void FindDialog::connectSlot()
+{
+    connect(&m_findBtn, SIGNAL(clicked()), this, SLOT(onFindClicked()));
+    connect(&m_closeBtn, SIGNAL(clicked()), this, SLOT(onCloseClicked()));
+}
+
+void FindDialog::setPlainTextEdit(QPlainTextEdit* pText)
+{
+    m_pText = pText;
+}
+
+QPlainTextEdit* FindDialog::getPlainTextEdit()
+{
+    return m_pText;
+}
+
+bool FindDialog::event(QEvent* evt)
+{
+    if( evt->type() == QEvent::Close )
+    {
+        hide();
+
+        return true;
+    }
+
+    return QDialog::event(evt);
+}
+
+void FindDialog::onFindClicked()
+{
+    QString target = m_findEdit.text();
+
+    if( (m_pText != NULL) && (target != "") )
+    {
+        QString text = m_pText->toPlainText();
+        QTextCursor c = m_pText->textCursor();
+        int index = -1;
+
+        if( m_forwardBtn.isChecked() )
+        {
+            index = text.indexOf(target, c.position(), m_matchChkBx.isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
+
+            if( index >= 0 )
+            {
+                c.setPosition(index);
+                c.setPosition(index + target.length(), QTextCursor::KeepAnchor);
+
+                m_pText->setTextCursor(c);
+            }
+        }
+
+        if( m_backwardBtn.isChecked() )
+        {
+            index = text.lastIndexOf(target, c.position() - text.length() - 1, m_matchChkBx.isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
+
+            if( index >= 0 )
+            {
+                c.setPosition(index + target.length());
+                c.setPosition(index, QTextCursor::KeepAnchor);
+
+                m_pText->setTextCursor(c);
+            }
+        }
+
+        if( index < 0 )
+        {
+            QMessageBox msg(this);
+
+            msg.setWindowTitle("寻找");
+            msg.setText("没有找到 \"" + target + "\" ");
+            msg.setIcon(QMessageBox::Information);
+            msg.setStandardButtons(QMessageBox::Ok);
+
+            msg.exec();
         }
     }
 }
 
-void MainWindow::on_pushButton_bracket_left_clicked()
+void FindDialog::onCloseClicked()
 {
-    addTextInLineEdit("(");
-}
-
-void MainWindow::on_pushButton_bracket_right_clicked()
-{
-    addTextInLineEdit(")");
-}
-
-void MainWindow::on_pushButton_exp_clicked()
-{
-    if(ui->actionAdvanced->isChecked())
-    {
-        addTextInLineEdit("exp()");
-        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
-    } else simpleAction("exp(",")");
-}
-
-void MainWindow::on_pushButton_ln_clicked()
-{
-    if(ui->actionAdvanced->isChecked())
-    {
-        addTextInLineEdit("ln()");
-        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
-    } else simpleAction("ln(",")");
-}
-
-void MainWindow::on_pushButton_pi_clicked()
-{
-    addTextInLineEdit("pi");
-}
-
-void MainWindow::on_pushButton_tan_clicked()
-{
-    if(ui->actionAdvanced->isChecked())
-    {
-        addTextInLineEdit("tg()");
-        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
-    } else simpleAction("tg(",")");
-}
-
-void MainWindow::on_pushButton_ctg_clicked()
-{
-    if(ui->actionAdvanced->isChecked())
-    {
-        addTextInLineEdit("ctg()");
-        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
-    }else simpleAction("ctg(",")");
-}
-
-void MainWindow::on_pushButton_sin_clicked()
-{
-    if(ui->actionAdvanced->isChecked())
-    {
-        addTextInLineEdit("sin()");
-        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
-    } else simpleAction("sin(",")");
-}
-
-void MainWindow::on_pushButton_cos_clicked()
-{
-    if(ui->actionAdvanced->isChecked())
-    {
-        addTextInLineEdit("cos()");
-        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
-    } else simpleAction("cos(",")");
-}
-
-void MainWindow::on_pushButton_sqrt_clicked()
-{
-    if(ui->actionAdvanced->isChecked())
-    {
-        addTextInLineEdit("sqrt()");
-        ui->lineEdit_expression->setCursorPosition(ui->lineEdit_expression->cursorPosition()-1);
-    } else simpleAction("sqrt(",")");
-}
-
-void MainWindow::on_pushButton_caret_clicked()
-{
-    ui->lineEdit_expression->insert("^");
-}
-
-void MainWindow::on_pushButton_clear_history_clicked()
-{
-    ui->textEdit_history->clear();
-}
-
-void MainWindow::on_actionStandard_changed()
-{
-    ui->actionAdvanced->setChecked(!ui->actionStandard->isChecked());
-}
-
-void MainWindow::on_actionAdvanced_changed()
-{
-    ui->actionStandard->setChecked(!ui->actionAdvanced->isChecked());
-    new_loan = new loan;
-    new_loan->setWindowTitle("贷款计算器 by hhb");
-    new_loan->show();
+    close();
 }
 </code></pre>
-<p>###calculator.cpp</p>
-<pre class=" language-c++"><code class="language-c++">#include "calculator.h"
-calculator::calculator()
+<h3 id="ReplaceDialog-cpp"><a href="#ReplaceDialog-cpp" class="headerlink" title="ReplaceDialog.cpp"></a>ReplaceDialog.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "ReplaceDialog.h"
+
+ReplaceDialog::ReplaceDialog(QWidget *parent,  QPlainTextEdit* pText) :
+    FindDialog(parent, pText)
 {
-    TParser::trigonometryMode mode = TParser::Radians;
-    parser.setTrigonometryMode(mode);
+    initControl();
+    connectSlot();
+    setWindowTitle("替换");
 }
 
-void calculator::setExpression(QString str)
+void ReplaceDialog::initControl()
 {
-    str1 = str;
+    m_replaceLbl.setText("替换为");
+    m_replaceBtn.setText("替换");
+    m_replaceAllBtn.setText("替换所有");
+
+    m_layout.removeWidget(&m_matchChkBx);
+    m_layout.removeWidget(&m_radioGrpBx);
+    m_layout.removeWidget(&m_closeBtn);
+
+    m_layout.addWidget(&m_replaceLbl, 1, 0);
+    m_layout.addWidget(&m_replaceEdit, 1, 1);
+    m_layout.addWidget(&m_replaceBtn, 1, 2);
+    m_layout.addWidget(&m_matchChkBx, 2, 0);
+    m_layout.addWidget(&m_radioGrpBx, 2, 1);
+    m_layout.addWidget(&m_replaceAllBtn, 2, 2);
+    m_layout.addWidget(&m_closeBtn, 3, 2);
 }
 
-void calculator::setMode(TParser::trigonometryMode mode)
+void ReplaceDialog::connectSlot()
 {
-    parser.setTrigonometryMode(mode);
+    connect(&m_replaceBtn, SIGNAL(clicked()), this, SLOT(onReplaceClicked()));
+    connect(&m_replaceAllBtn, SIGNAL(clicked()), this, SLOT(onReplaceAllClicked()));
 }
 
-void calculator::calculate()
+void ReplaceDialog::onReplaceClicked()
 {
-    if(str1.isEmpty()) throw err(1);
-    if(str1.contains('=')) throw err(3);
-    QByteArray ba = str1.toLatin1();
-    char *c_str2 = ba.data();
-    parser.Decompile();
-    try {
-        parser.Compile(c_str2);
-        parser.Evaluate();
-    } catch (TError) {
-        throw err(4);
+    QString target = m_findEdit.text();
+    QString to = m_replaceEdit.text();
+
+    if( (m_pText != NULL) && (target != "") && (to != "") )
+    {
+        QString selText = m_pText->textCursor().selectedText();
+
+        if( selText == target )
+        {
+            m_pText->insertPlainText(to);
+        }
+
+        onFindClicked();
     }
-    result = QString::number(parser.GetResult());
-    if(result == "inf") throw err(2);
 }
 
-QString calculator::getResult()
+void ReplaceDialog::onReplaceAllClicked()
 {
-    return result;
-}
-</code></pre>
-<h3 id="loan-cpp"><a href="#loan-cpp" class="headerlink" title="loan.cpp"></a>loan.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "loan.h"
-#include "ui_loan.h"
-#include"qmath.h"
-#include <QString>
-using namespace std;
+    QString target = m_findEdit.text();
+    QString to = m_replaceEdit.text();
 
-loan::loan(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::loan)
-{
-    ui->setupUi(this);
-}
-
-loan::~loan()
-{
-    delete ui;
-}
-
-
-
-void loan::on_pushButton_clicked()
-{
-    QString nian = ui->lineEdit_1->text();
-    jin=ui->lineEdit_2->text();
-    lv=ui->lineEdit_3->text();
-    double n=nian.toDouble();
-    double j=10000*jin.toDouble();
-    double l=0.01*lv.toDouble();
-    if(fangshi)
+    if( (m_pText != NULL) && (target != "") && (to != "") )
     {
-    double yj1=j*l*pow((1+l),12*n)/(pow((1+l),12*n)-1);
-    double lx1=12*yj1-j;
-    double hk1=(lx1+j);
-    ui->lineEdit_4->setText(tr("%1").arg(yj1));
-    ui->lineEdit_5->setText(tr("%1").arg(lx1));
-    ui->lineEdit_6->setText(tr("%1").arg(hk1));}
-    else  {
-        double lx1=((j/(12*n)+j*l)+j/(12*n)*(1+l))/2*(12*n)-j;
-        double hk1=j+lx1;
-        double yj1=hk1/(12*n);
-        ui->lineEdit_4->setText(tr("%1").arg(yj1));
-        ui->lineEdit_5->setText(tr("%1").arg(lx1));
-        ui->lineEdit_6->setText(tr("%1").arg(hk1));
-    }
-    }
-void loan::on_pushButton_2_clicked()
-{
-    ui->lineEdit_1->clear();
-    ui->lineEdit_2->clear();
-    ui->lineEdit_3->clear();
-    ui->lineEdit_4->clear();
-    ui->lineEdit_5->clear();
-    ui->lineEdit_6->clear();
-}
+        QString text = m_pText->toPlainText();
 
-void loan::on_radioButton_2_clicked()
-{
-    fangshi=true;
-}
+        text.replace(target, to, m_matchChkBx.isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
 
-void loan::on_radioButton_1_clicked()
-{
-    fangshi=false;
+        m_pText->clear();
+
+        m_pText->insertPlainText(text);
+    }
 }
 </code></pre>
-<h3 id="parser-cpp"><a href="#parser-cpp" class="headerlink" title="parser.cpp"></a>parser.cpp</h3><pre class=" language-c++"><code class="language-c++">#include <math.h>
-#include "parser.h"
+<h3 id="main-cpp"><a href="#main-cpp" class="headerlink" title="main.cpp"></a>main.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "myword.h"
+#include "mychild.h"
 
-#define OP_PLUS          0
-#define OP_MINUS         1
-#define OP_MULTIPLY      2
-#define OP_DIVIDE        3
-#define OP_PERCENT       4
-#define OP_POWER         5
-#define OP_UMINUS        6
-#define OP_SIN           7
-#define OP_COS           8
-#define OP_TG            9
-#define OP_CTG           10
-#define OP_EXP           11
-#define OP_LG            12
-#define OP_LN            13
-#define OP__PERCENT      14
-#define OP_SQRT          15
-#define M_PI             3.141592653589
-TParserNode *TParser::CreateNode(double _value, TParserNode *_left, TParserNode *_right)
-{
-   TParserNode *pNode = new TParserNode(_value, _left, _right);
-   history.push_back(pNode);
-   return pNode;
-}
-
-void TParser::SendError(int errNum)
-{
-   static char *errs[7] = { NULL,
-                            NULL,
-                            "Unexpected end of expression",
-                            "End of expression expected",
-                            "'(' or '[' expected",
-                            "')' or ']' expected",
-                            NULL
-                         };
-   static char buffer[80];
-   
-   int len = strlen(curToken);
-   
-   if(*curToken=='\0')
-      strcpy(curToken, "EOL");
-
-   switch(errNum)
-   {
-      case 0:
-         errs[0] = buffer;
-         break;
-
-      case 1:
-         errs[1] = buffer;
-         break;
-
-      case 6:
-         errs[6] = buffer;
-         break;
-   }
-
-   TError error(errs[errNum], pos-len);
-
-   for(int i=0; i<history.size(); i++)
-      delete history[i];
-   history.clear();
-
-   root = NULL;
-
-   throw error;
-
-   return;
-}
-   
-bool TParser::GetToken(void)
-{
-   *curToken = '\0';
-   
-   while(expr[pos]==' ') pos++;
-   
-   if(expr[pos]=='\0')
-   {
-      curToken[0] = '\0';
-      typToken = PARSER_END;
-      return true;
-   }
-   else if(IsDelim())
-   {
-      curToken[0] = expr[pos++];
-      curToken[1] = '\0';
-      switch(*curToken)
-      {
-         case '+': typToken = PARSER_PLUS; return true;
-         case '-': typToken = PARSER_MINUS; return true;
-         case '*': typToken = PARSER_MULTIPLY; return true;
-         case '/': typToken = PARSER_DIVIDE; return true;
-         case '%': typToken = PARSER_PERCENT; return true;
-         case '^': typToken = PARSER_POWER; return true;
-         case '(': typToken = PARSER_L_BRACKET; return true;
-         case ')': typToken = PARSER_R_BRACKET; return true;
-      }
-   }
-   else if(IsLetter())
-   {
-      int i=0;
-      while(IsLetter()) curToken[i++] = expr[pos++];
-      curToken[i] = '\0';
-
-      int len = strlen(curToken);
-      for(i=0; i<len; i++)
-         if(curToken[i]>='A' && curToken[i]<='Z')
-            curToken[i] += 'a' - 'A';
-
-      else if(!strcmp(curToken, "pi"))     { typToken = PARSER_PI; return true; }
-      else if(!strcmp(curToken, "sin"))    { typToken = PARSER_SIN; return true; }
-      else if(!strcmp(curToken, "cos"))    { typToken = PARSER_COS; return true; }
-      else if(!strcmp(curToken, "tg"))     { typToken = PARSER_TG; return true; }
-      else if(!strcmp(curToken, "ctg"))    { typToken = PARSER_CTG; return true; }
-      else if(!strcmp(curToken, "exp"))    { typToken = PARSER_EXP; return true; }
-      else if(!strcmp(curToken, "lg"))     { typToken = PARSER_LG; return true; }
-      else if(!strcmp(curToken, "ln"))     { typToken = PARSER_LN; return true; }
-      else if(!strcmp(curToken, "sqrt"))   { typToken = PARSER_SQRT; return true; }
-      else SendError(0);
-   }
-   else if(IsDigit() || IsPoint())
-   {
-      int i=0;
-      while(IsDigit()) curToken[i++] = expr[pos++];
-      if(IsPoint())
-      {
-         curToken[i++] = expr[pos++];
-         while(IsDigit()) curToken[i++] = expr[pos++];
-      }
-      curToken[i] = '\0';
-      typToken = PARSER_NUMBER;
-      return true;
-   }
-   else
-   {
-      curToken[0] = expr[pos++];
-      curToken[1] = '\0';
-      SendError(1);
-   }
-
-   return false;
-}      
-
-bool TParser::Compile(char *_expr)
-{
-   pos = 0;
-   expr = _expr;
-   *curToken = '\0';
-   if(root!=NULL)
-   {
-      DelTree(root);
-      root = NULL;
-   }
-
-   history.clear();
-
-   GetToken();
-   if(typToken==PARSER_END) SendError(2);
-   root = Expr();
-   if(typToken!=PARSER_END) SendError(3);
-
-   history.clear();
-
-   return true;
-}
-
-TParserNode *TParser::Expr(void)
-{
-   TParserNode *temp = Expr1();
-
-   while(1)
-   {
-      if(typToken==PARSER_PLUS)
-      {
-         GetToken();
-         temp = CreateNode(OP_PLUS, temp, Expr1());
-      }
-      else if(typToken==PARSER_MINUS)
-      {
-         GetToken();
-         temp = CreateNode(OP_MINUS, temp, Expr1());
-      }
-      else break;
-   }
-
-   return temp;
-}
-   
-TParserNode *TParser::Expr1(void)
-{
-   TParserNode *temp = Expr2();
-
-   while(1)
-   {
-      if(typToken==PARSER_MULTIPLY)
-      {
-         GetToken();
-         temp = CreateNode(OP_MULTIPLY, temp, Expr2());
-      }
-      else if(typToken==PARSER_DIVIDE)
-      {
-         GetToken();
-         temp = CreateNode(OP_DIVIDE, temp, Expr2());
-      }
-      else if(typToken==PARSER_PERCENT)
-      {
-         GetToken();
-         temp = CreateNode(OP_PERCENT, temp, Expr2());
-      }
-      else break;
-   }
-
-   return temp;
-}
-
-TParserNode *TParser::Expr2(void)
-{
-   TParserNode *temp = Expr3();
-
-   while(1)
-   {
-      if(typToken==PARSER_POWER)
-      {
-         GetToken();
-         temp = CreateNode(OP_POWER, temp, Expr2());
-      }
-      else break;
-   }
-
-   return temp;
-}
-
-TParserNode *TParser::Expr3(void)
-{
-   TParserNode *temp;
-
-   if(typToken==PARSER_PLUS)
-   {
-      GetToken();
-      temp = Expr4();
-   }
-   else if(typToken==PARSER_MINUS)
-   {
-      GetToken();
-      temp = CreateNode(OP_UMINUS, Expr4());
-   }
-   else
-      temp = Expr4();
-
-   return temp;      
-}
-
-TParserNode *TParser::Expr4(void)
-{
-   TParserNode *temp;
-
-   if(typToken>=PARSER_SIN && typToken<=PARSER_X)
-   {
-      temp = CreateNode(OP_SIN-PARSER_SIN+typToken);
-      GetToken();
-      if(typToken!=PARSER_L_BRACKET) SendError(4);
-      GetToken();
-      temp->left = Expr();
-      if(typToken!=PARSER_R_BRACKET) SendError(5);
-      GetToken();
-   }
-   else
-      temp = Expr5();
-
-   return temp;
-}
-
-TParserNode *TParser::Expr5(void)
-{
-   TParserNode *temp;
-   
-   switch(typToken)
-   {
-      case PARSER_NUMBER:
-         temp = CreateNode((double)atof(curToken));
-         GetToken();
-         break;
-
-      case PARSER_PI:
-         temp = CreateNode((double)M_PI);
-         GetToken();
-         break;
-
-      case PARSER_L_BRACKET:
-         GetToken();
-         temp = Expr();
-         if(typToken!=PARSER_R_BRACKET) SendError(5);
-         GetToken();
-         break;
-
-      default:
-         SendError(6);
-   }
-
-   return temp;         
-}
-
-double TParser::Evaluate(void)
-{
-   result = CalcTree(root);
-   return result;
-}
-
-double TParser::CalcTree(TParserNode *tree)
-{
-   static double temp;
-   
-   if(tree->left==NULL && tree->right==NULL)
-      return tree->value;
-   else
-      switch((int)tree->value)
-      {
-         case OP_PLUS:
-            return CalcTree(tree->left)+CalcTree(tree->right);
-
-         case OP_MINUS:
-            return CalcTree(tree->left)-CalcTree(tree->right);
-
-         case OP_MULTIPLY:
-            return CalcTree(tree->left)*CalcTree(tree->right);
-
-         case OP_DIVIDE:
-            return CalcTree(tree->left)/CalcTree(tree->right);
-
-         case OP_PERCENT:
-            return (int)CalcTree(tree->left)%(int)CalcTree(tree->right);
-
-         case OP_POWER:
-            return (double)pow(CalcTree(tree->left),CalcTree(tree->right));
-
-         case OP_UMINUS:
-            return -CalcTree(tree->left);
-
-         case OP_SIN:
-            if(mode == Radians)
-                return sin(CalcTree(tree->left));
-            else
-                return sin(CalcTree(tree->left)*(M_PI/180));
-
-         case OP_COS:
-            if(mode == Radians)
-                return cos(CalcTree(tree->left));
-            else
-                return cos(CalcTree(tree->left)*(M_PI/180));
-
-         case OP_TG:
-            if(mode == Radians)
-                return tan(CalcTree(tree->left));
-            else
-                return tan(CalcTree(tree->left)*(M_PI/180));
-
-         case OP_CTG:
-            if(mode == Radians)
-                return 1.0/tan(CalcTree(tree->left));
-            else
-                return 1.0/tan(CalcTree(tree->left)*(M_PI/180));
-
-         case OP_EXP:
-            return exp(CalcTree(tree->left));
-
-         case OP_LG:
-            return log10(CalcTree(tree->left));
-
-         case OP_LN:
-            return log(CalcTree(tree->left));
-
-         case OP_SQRT:
-            return sqrt(CalcTree(tree->left));
-      }
-
-   return 0;
-}
-
-void TParser::DelTree(TParserNode *tree)
-{
-   if(tree==NULL) return;
-
-   DelTree(tree->left);
-   DelTree(tree->right);
-
-   delete tree;
-
-   return;
-}
-
-void TParser::setTrigonometryMode(TParser::trigonometryMode setMode)
-{
-    mode = setMode;
-}
-</code></pre>
-<h3 id="main-cpp"><a href="#main-cpp" class="headerlink" title="main.cpp"></a>main.cpp</h3><pre class=" language-c++"><code class="language-c++">#include "mainwindow.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.setWindowTitle("calculator by hhb");
+    MyWord w;
     w.show();
     return a.exec();
 }
 </code></pre>
-<p>需要完整源码文件的可以留下联系方式。</p>
+<p>如有需要源文件的可以留下联系方式</p>
 
                 
             </div>
@@ -1854,7 +2198,7 @@ int main(int argc, char *argv[])
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://huhangbo.cn/2021/02/27/qt-calculator/">http://huhangbo.cn/2021/02/27/qt-calculator/</a>
+                    <a href="http://huhangbo.cn/2021/02/27/qt-word/">http://huhangbo.cn/2021/02/27/qt-word/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -2326,9 +2670,10 @@ int main(int argc, char *argv[])
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/02/27/qt-word/">
                     <div class="card-image">
@@ -2346,9 +2691,9 @@ int main(int argc, char *argv[])
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -2361,6 +2706,7 @@ int main(int argc, char *argv[])
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -2379,31 +2725,31 @@ int main(int argc, char *argv[])
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/02/23/tian-jia-loading-pages/">
+                <a href="/2021/02/27/qt-calculator/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="添加loading-pages">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Qt-Calculator">
                         
-                        <span class="card-title">添加loading-pages</span>
+                        <span class="card-title">Qt-Calculator</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            添加了一个玩命加载中的网页过渡动画
+                            用Qt做的计算器
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-27
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Hexo/" class="post-category">
-                                    Hexo
+                            <a href="/categories/Qt/" class="post-category">
+                                    Qt
                                 </a>
                             
                             
@@ -2413,12 +2759,8 @@ int main(int argc, char *argv[])
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
-                    </a>
-                    
-                    <a href="/tags/CSS/">
-                        <span class="chip bg-color">CSS</span>
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
                     </a>
                     
                 </div>

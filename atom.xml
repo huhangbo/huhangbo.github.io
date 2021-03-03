@@ -6,7 +6,7 @@
   <link href="http://huhangbo.cn/atom.xml" rel="self"/>
   
   <link href="http://huhangbo.cn/"/>
-  <updated>2021-02-27T06:03:02.483Z</updated>
+  <updated>2021-02-27T06:51:01.756Z</updated>
   <id>http://huhangbo.cn/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Qt-word</title>
+    <link href="http://huhangbo.cn/2021/02/27/qt-word/"/>
+    <id>http://huhangbo.cn/2021/02/27/qt-word/</id>
+    <published>2021-02-27T06:14:54.000Z</published>
+    <updated>2021-02-27T06:51:01.756Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Qt做的一个多文本编辑器&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Qt" scheme="http://huhangbo.cn/categories/Qt/"/>
+    
+    
+    <category term="C++" scheme="http://huhangbo.cn/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Qt-Calculator</title>
     <link href="http://huhangbo.cn/2021/02/27/qt-calculator/"/>
     <id>http://huhangbo.cn/2021/02/27/qt-calculator/</id>
     <published>2021-02-27T04:06:52.000Z</published>
-    <updated>2021-02-27T06:03:02.483Z</updated>
+    <updated>2021-02-27T06:38:35.923Z</updated>
     
     
     <summary type="html">&lt;p&gt;用&lt;strong&gt;Qt&lt;/strong&gt;做的计算器&lt;/p&gt;</summary>
